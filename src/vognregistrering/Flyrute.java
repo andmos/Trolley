@@ -32,5 +32,6 @@ public class Flyrute {
         @Override
         public String toString(){
             return "Flygning fra " + fra + " Til " + til; 
+           
         }
 }
