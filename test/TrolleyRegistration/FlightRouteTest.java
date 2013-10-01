@@ -47,7 +47,7 @@ public class FlightRouteTest {
         String result = instance.getTil();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+      
     }
 
     /**
@@ -60,7 +60,7 @@ public class FlightRouteTest {
         FlightRoute instance = null;
         instance.setTil(nyTilPlass);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -74,6 +74,6 @@ public class FlightRouteTest {
         String result = instance.toString();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 }

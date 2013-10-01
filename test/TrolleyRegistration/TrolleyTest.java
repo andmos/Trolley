@@ -47,7 +47,7 @@ public class TrolleyTest {
         int result = instance.getTrolleyNr();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+      
     }
 
     /**
@@ -60,7 +60,7 @@ public class TrolleyTest {
         Trolley instance = null;
         instance.setTrolleyNr(nyttNr);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -74,7 +74,7 @@ public class TrolleyTest {
         int result = instance.getOwnWeight();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -87,7 +87,7 @@ public class TrolleyTest {
         Trolley instance = null;
         instance.setOwnWeight(nyEgenvekt);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -101,7 +101,7 @@ public class TrolleyTest {
         int result = instance.getPayLoad();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+      
     }
 
     /**
@@ -114,7 +114,7 @@ public class TrolleyTest {
         Trolley instance = null;
         instance.setPayLoad(nyLastVekt);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -128,7 +128,7 @@ public class TrolleyTest {
         int result = instance.getTotalWeight();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+      
     }
 
     /**
@@ -142,6 +142,6 @@ public class TrolleyTest {
         String result = instance.toString();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
     }
 }
