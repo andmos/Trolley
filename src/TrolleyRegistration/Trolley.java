@@ -19,17 +19,11 @@ public class Trolley {
         return trolleyNr; 
     }
     
-    public void setTrolleyNr(int nyttNr){
-        trolleyNr = nyttNr; 
-    }
     
     public int getOwnWeight(){
         return ownWeight; 
     }
     
-    public void setOwnWeight(int nyEgenvekt){
-        ownWeight = nyEgenvekt; 
-    }
     
     public int getTotalWeight(){
         return totalWeight; 

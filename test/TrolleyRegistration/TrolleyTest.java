@@ -36,7 +36,7 @@ public class TrolleyTest {
     
     @After
     public void tearDown() {
-        Trolley instance = null;
+        instance = null;
     }
 
     /**
@@ -52,17 +52,6 @@ public class TrolleyTest {
     }
 
     /**
-     * Test of setTrolleyNr method, of class Trolley.
-     */
-    @Test
-    public void testSetTrolleyNr() {
-        int nyttNr = 5;
-        instance.setTrolleyNr(nyttNr);
-        
-        assertEquals(nyttNr, instance.getTrolleyNr()); 
-    }
-
-    /**
      * Test of getOwnWeight method, of class Trolley.
      */
     @Test
@@ -73,18 +62,6 @@ public class TrolleyTest {
         assertEquals(expResult, result);
         
        
-    }
-
-    /**
-     * Test of setOwnWeight method, of class Trolley.
-     */
-    @Test
-    public void testSetOwnWeight() {
-        int nyEgenvekt = 300;
-        
-        instance.setOwnWeight(nyEgenvekt);
-        
-        assertEquals(nyEgenvekt, instance.getOwnWeight()); 
     }
 
     /**
