@@ -22,7 +22,7 @@ public class FileWriter {
        f = new File(filename);
    }
   
-   public void writeToFile(ArrayList historyList) {
+   public void writeListToFile(ArrayList historyList) {
       try{
        FileOutputStream fos = new FileOutputStream(f);
        ObjectOutputStream oos = new ObjectOutputStream(fos);
