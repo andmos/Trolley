@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package TrolleyRegistration;
+package HelpClasses;
 
 /**
  *
@@ -15,19 +15,19 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class Filskriver {
+public class FileWriter {
    private static File f; 
    
-   public void setFilnavn(String filnavn){
-       f = new File(filnavn);
+   public void setFileName(String filename){
+       f = new File(filename);
    }
   
-   public void skrivTilFil(ArrayList historikk) {
+   public void writeToFile(ArrayList historyList) {
       try{
        FileOutputStream fos = new FileOutputStream(f);
        ObjectOutputStream oos = new ObjectOutputStream(fos);
-       for(int i = 0; i < historikk.size(); i++) {
-           oos.writeObject(historikk.get(i));
+       for(int i = 0; i < historyList.size(); i++) {
+           oos.writeObject(historyList.get(i));
        }
        fos.close();
        oos.close();
