@@ -92,13 +92,14 @@ public class TrolleyTest {
      */
     @Test
     public void testSetAndGetPayLoad() {
-        int expResult = 250;
+        int totalWeight = 350;
+        int addedPayload = 100; 
         
-        instance.setPayLoad(expResult);
+        instance.setTotalWeight(totalWeight);
         
         int result = instance.getPayLoad();
        
-        assertEquals(expResult, result);
+        assertEquals(addedPayload, result);
        
       
     }
@@ -108,12 +109,12 @@ public class TrolleyTest {
      */
     @Test
     public void testGetTotalWeight() {
-        int expResult = 300;
+        int expected = 550; 
         
-        instance.setPayLoad(50);
+        instance.setTotalWeight(expected);
         int result = instance.getTotalWeight();
         
-        assertEquals(expResult, result);
+        assertEquals(expected, result);
     }
 
     /**

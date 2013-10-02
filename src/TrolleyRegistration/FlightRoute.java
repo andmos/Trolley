@@ -11,11 +11,11 @@ package TrolleyRegistration;
 public class FlightRoute {
        
         private String flightRouteNr; 
-        private String til; 
+        private String destination; 
         
         public FlightRoute(String flightRouteNr, String til){
             this.flightRouteNr = flightRouteNr; 
-            this.til = til;
+            this.destination = til;
         }
        
         public String getFlightRouteNr(){
@@ -26,17 +26,17 @@ public class FlightRoute {
             flightRouteNr = newNumber; 
         }
         
-        public String getTil(){
-            return til; 
+        public String getDestination(){
+            return destination; 
         }
       
-        public void setTil(String nyTilPlass){
-            til = nyTilPlass; 
+        public void setDestination(String nyTilPlass){
+            destination = nyTilPlass; 
         }
      
         @Override
         public String toString(){
-            return "Flygning " + til + "til "; 
+            return "Flygning " + destination + "til "; 
            
         }
 }

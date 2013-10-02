@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<FlightRoutes>
+    <FlightRoute flightRouteNr="SKS11" destinatio="Tromso"></FlightRoute>
+    <FlightRoute flightRouteNr="SKS13" destinatio="Bergen"></FlightRoute>
+</FlightRoutes>

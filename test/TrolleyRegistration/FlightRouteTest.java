@@ -67,9 +67,9 @@ public class FlightRouteTest {
      * Test of getTil method, of class FlightRoute.
      */
     @Test
-    public void testGetTil() {
+    public void testGetDestination() {
         String expResult = "Bodo";
-        String result = instance.getTil();
+        String result = instance.getDestination();
         
         assertEquals(expResult, result);
         
@@ -79,12 +79,12 @@ public class FlightRouteTest {
      * Test of setTil method, of class FlightRoute.
      */
     @Test
-    public void testSetTil() {
+    public void testSetDestination() {
        
         String nyTilPlass = "Tromso";
      
-        instance.setTil(nyTilPlass);
+        instance.setDestination(nyTilPlass);
        
-        assertEquals(nyTilPlass, instance.getTil()); 
+        assertEquals(nyTilPlass, instance.getDestination()); 
     }
 }

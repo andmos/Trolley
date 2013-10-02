@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Trolleys>
-    <Trolley id="1" ownWeight="220"></Trolley>
-    <Trolley id="2" ownWeight="210"></Trolley>
-    <Trolley id="3" ownWeight="220"></Trolley>
-    <Trolley id="4" ownWeight="215"></Trolley>
-    <Trolley id="5" ownWeight="215"></Trolley>
-    <Trolley id="6" ownWeight="210"></Trolley>
-    <Trolley id="7" ownWeight="210"></Trolley>
-    <Trolley id="8" ownWeight="210"></Trolley>
-    <Trolley id="9" ownWeight="210"></Trolley>
+    <Trolley id="1" ownWeight="220"/>
+    <Trolley id="2" ownWeight="210"/>
+    <Trolley id="3" ownWeight="220"/>
+    <Trolley id="4" ownWeight="215"/>
+    <Trolley id="5" ownWeight="215"/>
+    <Trolley id="6" ownWeight="210"/>
+    <Trolley id="7" ownWeight="210"/>
+    <Trolley id="8" ownWeight="210"/>
+    <Trolley id="9" ownWeight="210"/>
 
 </Trolleys>
 
