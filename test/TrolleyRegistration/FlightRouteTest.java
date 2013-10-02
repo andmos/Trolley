@@ -39,7 +39,6 @@ public class FlightRouteTest {
     public void tearDown() {
         instance = null; 
     }
-
     /**
      * Test of getFlightRouteNr method, of class FlightRoute.
      */
