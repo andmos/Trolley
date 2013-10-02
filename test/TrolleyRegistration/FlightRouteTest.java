@@ -17,6 +17,8 @@ import static org.junit.Assert.*;
  */
 public class FlightRouteTest {
     
+    FlightRoute instance;
+    
     public FlightRouteTest() {
     }
     
@@ -30,10 +32,36 @@ public class FlightRouteTest {
     
     @Before
     public void setUp() {
+        instance = new FlightRoute("111","Bodo"); 
     }
     
     @After
     public void tearDown() {
+        instance = null; 
+    }
+
+    /**
+     * Test of getFlightRouteNr method, of class FlightRoute.
+     */
+    @Test
+    public void testGetFlightRouteNr() {
+        String expResult = "111";
+        String result = instance.getFlightRouteNr();
+      
+        assertEquals(expResult, result);
+ 
+    }
+
+    /**
+     * Test of setFlightRouteNr method, of class FlightRoute.
+     */
+    @Test
+    public void testSetFlightRouteNr() {
+        String newNumber = "222";
+       
+        instance.setFlightRouteNr(newNumber);
+        
+        assertEquals(newNumber, instance.getFlightRouteNr()); 
     }
 
     /**
@@ -41,13 +69,11 @@ public class FlightRouteTest {
      */
     @Test
     public void testGetTil() {
-        System.out.println("getTil");
-        FlightRoute instance = null;
-        String expResult = "";
+        String expResult = "Bodo";
         String result = instance.getTil();
+        
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-      
+        
     }
 
     /**
@@ -55,25 +81,11 @@ public class FlightRouteTest {
      */
     @Test
     public void testSetTil() {
-        System.out.println("setTil");
-        String nyTilPlass = "";
-        FlightRoute instance = null;
+       
+        String nyTilPlass = "Tromso";
+     
         instance.setTil(nyTilPlass);
-        // TODO review the generated test code and remove the default call to fail.
        
-    }
-
-    /**
-     * Test of toString method, of class FlightRoute.
-     */
-    @Test
-    public void testToString() {
-        System.out.println("toString");
-        FlightRoute instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-       
+        assertEquals(nyTilPlass, instance.getTil()); 
     }
 }

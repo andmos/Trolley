@@ -16,6 +16,7 @@ import static org.junit.Assert.*;
  * @author andreasmosti
  */
 public class TrolleyTest {
+    Trolley instance; 
     
     public TrolleyTest() {
     }
@@ -30,10 +31,12 @@ public class TrolleyTest {
     
     @Before
     public void setUp() {
+        instance = new Trolley(1, 250); 
     }
     
     @After
     public void tearDown() {
+        Trolley instance = null;
     }
 
     /**
@@ -41,9 +44,7 @@ public class TrolleyTest {
      */
     @Test
     public void testGetTrolleyNr() {
-        System.out.println("getTrolleyNr");
-        Trolley instance = null;
-        int expResult = 0;
+        int expResult = 1;
         int result = instance.getTrolleyNr();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -55,12 +56,10 @@ public class TrolleyTest {
      */
     @Test
     public void testSetTrolleyNr() {
-        System.out.println("setTrolleyNr");
-        int nyttNr = 0;
-        Trolley instance = null;
+        int nyttNr = 5;
         instance.setTrolleyNr(nyttNr);
-        // TODO review the generated test code and remove the default call to fail.
         
+        assertEquals(nyttNr, instance.getTrolleyNr()); 
     }
 
     /**
@@ -68,12 +67,11 @@ public class TrolleyTest {
      */
     @Test
     public void testGetOwnWeight() {
-        System.out.println("getOwnWeight");
-        Trolley instance = null;
-        int expResult = 0;
+        int expResult = 250;
         int result = instance.getOwnWeight();
+        
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
+        
        
     }
 
@@ -82,39 +80,27 @@ public class TrolleyTest {
      */
     @Test
     public void testSetOwnWeight() {
-        System.out.println("setOwnWeight");
-        int nyEgenvekt = 0;
-        Trolley instance = null;
+        int nyEgenvekt = 300;
+        
         instance.setOwnWeight(nyEgenvekt);
-        // TODO review the generated test code and remove the default call to fail.
-       
+        
+        assertEquals(nyEgenvekt, instance.getOwnWeight()); 
     }
 
     /**
      * Test of getPayLoad method, of class Trolley.
      */
     @Test
-    public void testGetPayLoad() {
-        System.out.println("getPayLoad");
-        Trolley instance = null;
-        int expResult = 0;
+    public void testSetAndGetPayLoad() {
+        int expResult = 250;
+        
+        instance.setPayLoad(expResult);
+        
         int result = instance.getPayLoad();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-      
-    }
-
-    /**
-     * Test of setPayLoad method, of class Trolley.
-     */
-    @Test
-    public void testSetPayLoad() {
-        System.out.println("setPayLoad");
-        int nyLastVekt = 0;
-        Trolley instance = null;
-        instance.setPayLoad(nyLastVekt);
-        // TODO review the generated test code and remove the default call to fail.
        
+        assertEquals(expResult, result);
+       
+      
     }
 
     /**
@@ -122,13 +108,12 @@ public class TrolleyTest {
      */
     @Test
     public void testGetTotalWeight() {
-        System.out.println("getTotalWeight");
-        Trolley instance = null;
-        int expResult = 0;
+        int expResult = 300;
+        
+        instance.setPayLoad(50);
         int result = instance.getTotalWeight();
+        
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-      
     }
 
     /**
@@ -136,12 +121,8 @@ public class TrolleyTest {
      */
     @Test
     public void testToString() {
-        System.out.println("toString");
-        Trolley instance = null;
-        String expResult = "";
+        String expResult = "Vogn 1 Egenvekt: 250 Lastvekt: 0 Totalvekt: 250";
         String result = instance.toString();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-    
     }
 }

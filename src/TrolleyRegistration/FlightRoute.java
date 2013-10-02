@@ -10,13 +10,22 @@ package TrolleyRegistration;
  */
 public class FlightRoute {
        
+        private String flightRouteNr; 
         private String til; 
         
-        public FlightRoute( String til){
-            
+        public FlightRoute(String flightRouteNr, String til){
+            this.flightRouteNr = flightRouteNr; 
             this.til = til;
         }
        
+        public String getFlightRouteNr(){
+            return flightRouteNr; 
+        }
+        
+        public void setFlightRouteNr(String newNumber){
+            flightRouteNr = newNumber; 
+        }
+        
         public String getTil(){
             return til; 
         }
