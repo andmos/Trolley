@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <FlightRoutes>
-    <FlightRoute flightRouteNr="SKS11" destinatio="Tromso"></FlightRoute>
-    <FlightRoute flightRouteNr="SKS13" destinatio="Bergen"></FlightRoute>
+    <FlightRoute flightRouteNr="SKS11" destination="Tromso"></FlightRoute>
+    <FlightRoute flightRouteNr="SKS13" destination="Bergen"></FlightRoute>
+    <FlightROute flightRouteNr="WF881/829" destination="SVJ"></FlightROute> <!-- Denne er reel, slik skal det se ut -->
 </FlightRoutes>
