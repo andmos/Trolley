@@ -22,14 +22,16 @@ import org.w3c.dom.NodeList;
  *
  * @author haavamoa
  */
-public class XMLParser {
+public class XMLFileParser {
 private static String TrolleysPath = System.getProperty("user.dir")+"/DOC/Trolleys.xml";
+private static String FlightRoutePath = System.getProperty("user.dir")+"/DOC/FlightRoute.xml"; 
+
 public ArrayList<Trolley> trolleys = new ArrayList<Trolley>();    
 
-    public XMLParser() {
+    public XMLFileParser() {
         try{
             //TODO: Add the rest of the XML files.    
-            trolleys = parseTrolleys();
+            trolleys = getTrolleysFromeFile();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -47,7 +49,7 @@ public ArrayList<Trolley> trolleys = new ArrayList<Trolley>();
  * Sets the Trolleys
  * @param trolleys 
  */
-    public void setTrolleys(ArrayList<Trolley> trolleys) {
+    public void writeTrolleysToXMLFile(ArrayList<Trolley> trolleys) {
         //TODO: Write to XML if you change them.
         this.trolleys = trolleys;
     }
@@ -57,7 +59,7 @@ public ArrayList<Trolley> trolleys = new ArrayList<Trolley>();
      * @return Trolleys from XL file.
      * @throws Exception Catches if a attribute has been incorectly formated.
      */
-    private ArrayList<Trolley> parseTrolleys() throws Exception {
+    private ArrayList<Trolley> getTrolleysFromeFile() throws Exception {
         ArrayList<Trolley> tempTrolley = new ArrayList<Trolley>();
         File fxmlfile = new File(TrolleysPath);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -81,7 +83,7 @@ public ArrayList<Trolley> trolleys = new ArrayList<Trolley>();
     
     
     public static void main(String[] args) {
-        XMLParser xmlP = new XMLParser();
+        XMLFileParser xmlP = new XMLFileParser();
         for(Trolley t:xmlP.getTrolleys())
             System.out.println("Trolley id:"+t.getTrolleyNr()+"\n own weigth: "+t.getOwnWeight());
         

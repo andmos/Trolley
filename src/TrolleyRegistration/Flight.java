@@ -31,6 +31,7 @@ public class Flight {
             }
             return sum; 
         }
+        
         public void clearTrolleysOnFlight(){
             trolleysOnFlight.clear(); 
         }

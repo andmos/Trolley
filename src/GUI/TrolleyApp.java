@@ -4,7 +4,7 @@
  */
 package GUI;
 
-import HelpClasses.XMLParser;
+import HelpClasses.XMLFileParser;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagLayout;
