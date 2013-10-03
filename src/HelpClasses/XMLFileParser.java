@@ -101,14 +101,5 @@ public XMLFileParser() {
             return tempFlightRoute;        
     }
     
-   
-    
-    
-    public static void main(String[] args) {
-        XMLFileParser xmlP = new XMLFileParser();
-        for(Trolley t:xmlP.getTrolleys())
-            System.out.println("Trolley id:"+t.getTrolleyNr()+"\n own weigth: "+t.getOwnWeight());
-        
-    }
     
 }
