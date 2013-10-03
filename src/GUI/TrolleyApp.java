@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import HelpClasses.XMLParser;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagLayout;
@@ -13,7 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
- *
+ * Trolley is a application made for Posten Norge.
  * @author haavamoa
  */
 public class TrolleyApp extends JPanel {
@@ -26,6 +27,10 @@ private static int SCREEN_WIDTH = GraphicsEnvironment.getLocalGraphicsEnvironmen
         
     }
     
+    /**
+     * Main method witch will start the application.
+     * @param args 
+     */
      public static void main(String[] args) {
         JFrame frame = new JFrame("Trolley");
         frame.setContentPane(new TrolleyApp());
