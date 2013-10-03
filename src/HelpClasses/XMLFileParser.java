@@ -17,7 +17,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-
+//@TODO: Kaste bedre exeptions! la det komme fram hva som skjer
 
 /**
  *
