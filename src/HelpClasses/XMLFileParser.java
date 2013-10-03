@@ -4,6 +4,7 @@
  */
 package HelpClasses;
 
+import TrolleyRegistration.FlightRoute;
 import TrolleyRegistration.Trolley;
 import java.io.File;
 import java.io.IOException;
@@ -26,45 +27,42 @@ public class XMLFileParser {
 private static String TrolleysPath = System.getProperty("user.dir")+"/DOC/Trolleys.xml";
 private static String FlightRoutePath = System.getProperty("user.dir")+"/DOC/FlightRoute.xml"; 
 
-public ArrayList<Trolley> trolleys = new ArrayList<Trolley>();    
-
-    public XMLFileParser() {
+private ArrayList<Trolley> trolleys = new ArrayList<Trolley>();    
+private ArrayList<FlightRoute> flightRoutes = new ArrayList<FlightRoute>(); 
+   
+public XMLFileParser() {
         try{
             //TODO: Add the rest of the XML files.    
             trolleys = getTrolleysFromeFile();
+            flightRoutes = getFlightRoutesFromFile();
+            
         }catch(Exception e){
             e.printStackTrace();
         }
         
     }
 
-    /**
-     * get parsed Trolleys from XML file.
-     * @return 
-     */
     public ArrayList<Trolley> getTrolleys() {
         return trolleys;
     }
-/**
- * Sets the Trolleys
- * @param trolleys 
- */
+    
+    
+    public ArrayList<FlightRoute> getFlightRoutes(){
+        return flightRoutes; 
+    }
+    
     public void writeTrolleysToXMLFile(ArrayList<Trolley> trolleys) {
         //TODO: Write to XML if you change them.
         this.trolleys = trolleys;
     }
     
-    /**
-     * Method to parse existing trolleys from XML file.
-     * @return Trolleys from XL file.
-     * @throws Exception Catches if a attribute has been incorectly formated.
-     */
+
     private ArrayList<Trolley> getTrolleysFromeFile() throws Exception {
         ArrayList<Trolley> tempTrolley = new ArrayList<Trolley>();
-        File fxmlfile = new File(TrolleysPath);
+        File xmlfile = new File(TrolleysPath);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-        Document doc = dBuilder.parse(fxmlfile);
+        Document doc = dBuilder.parse(xmlfile); 
         NodeList nList = doc.getElementsByTagName("Trolley");
             for (int i = 0; i < nList.getLength(); i++) {
                 Node nNode = nList.item(i);
@@ -80,6 +78,30 @@ public ArrayList<Trolley> trolleys = new ArrayList<Trolley>();
             }
             return tempTrolley;        
     }
+    
+    private ArrayList<FlightRoute> getFlightRoutesFromFile() throws Exception {
+        ArrayList<FlightRoute> tempFlightRoute = new ArrayList<FlightRoute>();
+        File xmlfile = new File(FlightRoutePath);
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(xmlfile); 
+        NodeList nList = doc.getElementsByTagName("FlightRoute");
+            for (int i = 0; i < nList.getLength(); i++) {
+                Node nNode = nList.item(i);
+                Element eElement = (Element) nNode;
+                try{
+                String flightRouteNr = eElement.getAttribute("flightRouteNr");
+                String destination = eElement.getAttribute("ownWeight");
+                tempFlightRoute.add(new FlightRoute(flightRouteNr, destination));
+                }catch(NumberFormatException e){
+                    e.printStackTrace();
+                }
+                
+            }
+            return tempFlightRoute;        
+    }
+    
+   
     
     
     public static void main(String[] args) {
