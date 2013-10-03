@@ -5,6 +5,7 @@
 package TrolleyRegistration;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -14,9 +15,11 @@ public class Flight {
         
         FlightRoute flightRoute; 
         ArrayList<Trolley> trolleysOnFlight = new ArrayList<Trolley>(); 
+        Date timestamp; 
         
         public Flight(FlightRoute flightRoute){
             this.flightRoute = flightRoute; 
+            
         }
         public void addTrolleyToFlight(Trolley newTrolley){
             if(newTrolley.getPayLoad() > 0){
@@ -46,6 +49,6 @@ public class Flight {
         
         @Override
         public String toString(){
-            return flightRoute.toString() + " Total weight on flight: " + getTotalPayloadOnFlight(); 
+            return flightRoute.toString() + " Total payload on flight: " + getTotalPayloadOnFlight(); 
         }
 }

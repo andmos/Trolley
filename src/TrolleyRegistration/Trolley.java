@@ -40,7 +40,7 @@ public class Trolley {
     
     @Override
     public String toString(){
-        return "Vogn " + trolleyNr + " \nEgenvekt: " + ownWeight + " \nLastvekt: " + getPayLoad() + " Totalvekt: " + getTotalWeight(); 
+        return "Vogn " + trolleyId + " \nEgenvekt: " + ownWeight + " \nLastvekt: " + getPayLoad() + " Totalvekt: " + getTotalWeight(); 
     }
 
 }
