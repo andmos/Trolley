@@ -3,4 +3,5 @@
 <FlightRoutes>
     <FlightRoute flightRouteNr="SKS11" destination="Tromso"></FlightRoute>
     <FlightRoute flightRouteNr="SKS13" destination="Bergen"></FlightRoute>
+    <FlightROute flightRouteNr="WF881/829" destination="SVJ"></FlightROute> <!-- Denne er reel, slik skal det se ut -->
 </FlightRoutes>
