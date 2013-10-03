@@ -45,7 +45,7 @@ public class TrolleyTest {
     @Test
     public void testGetTrolleyNr() {
         int expResult = 1;
-        int result = instance.getTrolleyNr();
+        int result = instance.getTrolleyId();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
       

@@ -4,19 +4,19 @@ package TrolleyRegistration;
 
 public class Trolley {
     
-    private int trolleyNr; 
+    private int trolleyId; 
     private int ownWeight; 
     private int totalWeight; 
     
-    public Trolley(int vognNr, int egenVekt){
-        this.trolleyNr = vognNr; 
+    public Trolley(int trolleyId, int egenVekt){
+        this.trolleyId = trolleyId; 
         this.ownWeight = egenVekt;
         this.totalWeight = ownWeight; 
         
     }
     
-    public int getTrolleyNr(){
-        return trolleyNr; 
+    public int getTrolleyId(){
+        return trolleyId; 
     }
     
     
@@ -40,7 +40,7 @@ public class Trolley {
     
     @Override
     public String toString(){
-        return "Vogn " + trolleyNr + " Egenvekt: " + ownWeight + " Lastvekt: " + getPayLoad() + " Totalvekt: " + getTotalWeight(); 
+        return "Vogn " + trolleyId + " Egenvekt: " + ownWeight + " Lastvekt: " + getPayLoad() + " Totalvekt: " + getTotalWeight(); 
     }
 
 }
