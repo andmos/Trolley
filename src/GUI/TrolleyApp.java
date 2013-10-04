@@ -51,7 +51,7 @@ private JList trolleys;
      */
     private void menuSetup(){
         
-        String[] buttons = {"Innregistrering","Vareregister","Fly-register","Vognr-egister","Flyliste TRAFIKK/POST","Kopi av vogn-tag","Statistikk"};
+        String[] buttons = {"Innregistrering", "Flyliste TRAFIKK/POST", "Endre flygning", "Legg til flygning"};
         
         c.gridx =1;
         for (int i = 0; i < buttons.length; i++) {

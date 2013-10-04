@@ -10,14 +10,25 @@ package TrolleyRegistration;
  */
 public class FlightRoute {
        
+        private int flightNr;  // entity!
         private String flightRouteNr; 
         private String destination; 
+ 
         
-        public FlightRoute(String flightRouteNr, String til){
+        public FlightRoute(int flightNr, String flightRouteNr, String til){
             this.flightRouteNr = flightRouteNr; 
             this.destination = til;
+            this.flightNr = flightNr;
         }
        
+        public int getFlightNr(){
+            return flightNr; 
+        }
+        
+        public void setFlightNr(int newFlightNr){
+            flightNr = newFlightNr; 
+        }
+        
         public String getFlightRouteNr(){
             return flightRouteNr; 
         }
@@ -36,7 +47,7 @@ public class FlightRoute {
      
         @Override
         public String toString(){
-            return "Flygning " + destination + "til "; 
+            return "Flygning " + flightNr + " " + flightRouteNr + " " + "til " + destination; 
            
         }
 }

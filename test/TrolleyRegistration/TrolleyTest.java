@@ -99,7 +99,8 @@ public class TrolleyTest {
      */
     @Test
     public void testToString() {
-        String expResult = "Vogn 1 Egenvekt: 250 Lastvekt: 0 Totalvekt: 250";
+        instance.setTotalWeight(350);
+        String expResult = "Vogn 1 Egenvekt: 250 Lastvekt: 100 Totalvekt: 350";
         String result = instance.toString();
         assertEquals(expResult, result);
     }

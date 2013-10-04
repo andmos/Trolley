@@ -16,9 +16,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-//@TODO: Kaste bedre exeptions! la det komme fram hva som skjer
-
+/*
+*
+* @TODO Kaste bedre exeptions! la det komme fram hva som skjer
+*/
 /**
  *
  * @author haavamoa
@@ -91,8 +92,9 @@ public XMLFileParser() {
                 Element eElement = (Element) nNode;
                 try{
                 String flightRouteNr = eElement.getAttribute("flightRouteNr");
-                String destination = eElement.getAttribute("ownWeight");
-                tempFlightRoute.add(new FlightRoute(flightRouteNr, destination));
+                String destination = eElement.getAttribute("destination");
+                int flightNr = Integer.parseInt(eElement.getAttribute("flightNr")); 
+                tempFlightRoute.add(new FlightRoute(flightNr, flightRouteNr, destination));
                 }catch(NumberFormatException e){
                     e.printStackTrace();
                 }
@@ -101,5 +103,16 @@ public XMLFileParser() {
             return tempFlightRoute;        
     }
     
+    public static void main(String[] args) {
+        XMLFileParser pars = new XMLFileParser(); 
+        ArrayList<Trolley> trolleys = pars.getTrolleys(); 
+        ArrayList<FlightRoute> flights = pars.getFlightRoutes(); 
+        for(FlightRoute f : flights){
+            System.out.println(f.toString());
+        }
+        for(Trolley t : trolleys){
+            System.out.println(t.toString());
+        }
+    }
     
 }

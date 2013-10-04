@@ -32,7 +32,7 @@ public class FlightRouteTest {
     
     @Before
     public void setUp() {
-        instance = new FlightRoute("111","Bodo"); 
+        instance = new FlightRoute(1, "111","Bodo"); 
     }
     
     @After
