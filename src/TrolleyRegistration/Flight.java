@@ -11,13 +11,13 @@ import java.util.Date;
  *
  * @author andreasmosti
  */
-public class FlightList {
+public class Flight {
         
         FlightRoute flightRoute; 
         ArrayList<Trolley> trolleysOnFlight = new ArrayList<Trolley>(); 
-        Date timestamp; 
+        Date timestamp;  // in use with tag
         
-        public FlightList(FlightRoute flightRoute){
+        public Flight(FlightRoute flightRoute){
             this.flightRoute = flightRoute; 
             
         }

@@ -7,5 +7,4 @@
     <FlightRoute flightNr="5" flightRouteNr="WF701" destination="SSJ"></FlightRoute>
     <FlightRoute flightNr="6" flightRouteNr="WF739" destination="MJF"></FlightRoute>
     <FlightRoute flightNr="7" flightRouteNr="WF842" destination="ANX"></FlightRoute>
-      
 </FlightRoutes>
