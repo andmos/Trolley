@@ -9,7 +9,11 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.net.URL;
+import java.net.URLClassLoader;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -55,9 +59,12 @@ public class MainMenu {
      *  Setup the logo panel.
      */
     private void setupLogoPanel(){
-        logoPanel.setPreferredSize(new Dimension(trolleyApp.getWidth(),100));
-        logoPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        logoPanel.add(new JLabel("LOGO"));
+        logoPanel.setPreferredSize(new Dimension(trolleyApp.getWidth(),140));
+        logoPanel.setBackground(Color.white);
+        JLabel logo = new JLabel();
+        ImageIcon image = new ImageIcon(this.getClass().getResource("/res/posten.jpg"));
+        logo.setIcon(image);
+        logoPanel.add(logo);
         trolleyApp.add(logoPanel,BorderLayout.NORTH); //Add to main panel.
     }
     /**
@@ -66,7 +73,7 @@ public class MainMenu {
    private void normalMenuSetup(){
        normalMenu.setPreferredSize(new Dimension(trolleyApp.getWidth(),180));
        normalMenu.setLayout(new GridBagLayout());
-       normalMenu.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+       normalMenu.setBackground(Color.white);
        JButton button;
        JLabel label;
        GridBagConstraints c = new GridBagConstraints();
@@ -97,7 +104,7 @@ public class MainMenu {
    private void adminMenuSetup(){  
        adminMenu.setPreferredSize(new Dimension(trolleyApp.getWidth(),100));
        adminMenu.setLayout(new GridBagLayout());
-       adminMenu.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+       adminMenu.setBackground(Color.white);
        GridBagConstraints c = new GridBagConstraints();
        JButton button;
        JLabel label;

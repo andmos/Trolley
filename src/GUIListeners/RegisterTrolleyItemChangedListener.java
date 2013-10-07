@@ -47,8 +47,8 @@ public class RegisterTrolleyItemChangedListener implements ItemListener{
                     destination.disable();
                 }
             }else{
-               routeNr.setText("");
-               destination.setText("");
+               routeNr.setText(null);
+               destination.setText(null);
                routeNr.enable();
                destination.enable();
              }

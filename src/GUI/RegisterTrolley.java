@@ -3,6 +3,7 @@ package GUI;
 
 
 import GUIListeners.RegisterTrolleyItemChangedListener;
+import GUIListeners.RegisterTrolleyKeyListener;
 import TrolleyRegistration.FlightRoute;
 import TrolleyRegistration.Trolley;
 import java.awt.BorderLayout;
@@ -16,9 +17,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JPanel;
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 import sun.rmi.transport.proxy.CGIHandler;
 
 /**
@@ -81,6 +88,10 @@ public class RegisterTrolley {
         flightRoutePanel.add(label,c);
         c.gridx = 1;
         JTextField routeNr = new JTextField(trolleyApp.xmlp.getFlightRoutes().get(0).getFlightRouteNr(),10);
+        routeNr.setName("routeNr");
+        RegisterTrolleyKeyListener keylistener = new RegisterTrolleyKeyListener(this);
+        keylistener.setRouteNr(routeNr);
+        routeNr.addKeyListener(keylistener);
         routeNr.disable();
         flightRoutePanel.add(routeNr,c);
         
@@ -90,6 +101,9 @@ public class RegisterTrolley {
         flightRoutePanel.add(label,c);
         c.gridx = 1;
         JTextField destination = new JTextField(trolleyApp.xmlp.getFlightRoutes().get(0).getDestination(),10);
+        destination.setName("destination");
+        keylistener.setDestination(destination);
+        destination.addKeyListener(keylistener);
         destination.disable();
         flightRoutePanel.add(destination,c);
         
@@ -99,6 +113,8 @@ public class RegisterTrolley {
         flightRoutePanel.add(label,c);
         c.gridx= 1;
         JComboBox flightNr = new JComboBox(flightNrs);
+        flightNr.setFocusable(true);
+        flightNr.requestFocus();
         flightNr.setName("flightnr");
         flightNr.addItemListener(new RegisterTrolleyItemChangedListener(flightNr,this, routeNr, destination));
         flightNr.setMinimumSize(new Dimension(200, 20));
@@ -130,6 +146,7 @@ public class RegisterTrolley {
         c.gridy = 0;
         trolleyPanel.add(label,c);
         
+        activeTrolleyId = trolleyApp.xmlp.getTrolleys().get(0).getTrolleyId();
         c.gridx = 1;
         JComboBox trolleys = new JComboBox(trolleyIds);
         trolleys.setName("trolleys");
@@ -148,8 +165,10 @@ public class RegisterTrolley {
         
         //Predefined loadweigth to use inside totalweight listener
         final JLabel loadWeigth = new JLabel("",10);
+        loadWeigth.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.BLACK));
         c.gridx = 1;
         c.gridy = 2;
+        c.insets = new Insets(9, 0, 0, 0);
         basisPanel.add(loadWeigth,c);
         
         //Total weigth
@@ -158,7 +177,7 @@ public class RegisterTrolley {
         c.gridy=0;
         basisPanel.add(label,c);
         
-        final JTextField totalWeigth = new JTextField(10);
+        final JTextField totalWeigth = new JTextField(3);
         c.gridx = 1;
         c.gridy=0;
         totalWeigth.addKeyListener(new KeyListener() {
@@ -166,13 +185,16 @@ public class RegisterTrolley {
             @Override
             public void keyTyped(KeyEvent e) {
             }
-
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    System.out.println(activeTrolleyId);
-                    trolleyApp.xmlp.getTrolleys().get(activeTrolleyId).setTotalWeight(Integer.parseInt(totalWeigth.getText()));
-                    loadWeigth.setText(trolleyApp.xmlp.getTrolleys().get(activeTrolleyId).getPayLoad()+" kg");
+                    System.out.println("jaij");
+                    for (Trolley t:trolleyApp.xmlp.getTrolleys()){
+                        if(activeTrolleyId==t.getTrolleyId()){
+                        t.setTotalWeight(Integer.parseInt(totalWeigth.getText()));
+                        loadWeigth.setText(t.getPayLoad()+" kg");
+                    }
+                    }
                     trolleyApp.revalidate();
                     trolleyApp.repaint();
                 }
@@ -201,8 +223,49 @@ public class RegisterTrolley {
         c.gridy = 2;
         c.insets = new Insets(10, 0, 0, 0);
         label.setFont(new Font("Ariel", Font.BOLD, 14));
+        label.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.BLACK));
         basisPanel.add(label,c);
         
+        JButton btn;
+        
+        //BACK button
+        btn = new JButton("Tilbake");
+        btn.setForeground(Color.red);
+        c.gridx = 0;
+        c.gridy=3;
+        c.insets = new Insets(50, 0, 0, 100);
+        btn.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                new MainMenu(trolleyApp);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent me) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent me) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent me) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent me) {
+            }
+        });
+        basisPanel.add(btn,c);
+        
+        //OK button
+        btn = new JButton("Fortsett");
+        btn.setForeground(Color.green);
+        c.gridx = 1;
+        c.gridy=3;
+        c.insets = new Insets(50, 100, 0, 0);
+        basisPanel.add(btn,c);
         
         trolleyApp.add(basisPanel,BorderLayout.SOUTH);
     }
