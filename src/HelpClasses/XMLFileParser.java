@@ -102,17 +102,5 @@ public XMLFileParser() {
             }
             return tempFlightRoute;        
     }
-    
-    public static void main(String[] args) {
-        XMLFileParser pars = new XMLFileParser(); 
-        ArrayList<Trolley> trolleys = pars.getTrolleys(); 
-        ArrayList<FlightRoute> flights = pars.getFlightRoutes(); 
-        for(FlightRoute f : flights){
-            System.out.println(f.toString());
-        }
-        for(Trolley t : trolleys){
-            System.out.println(t.toString());
-        }
-    }
-    
+  
 }
