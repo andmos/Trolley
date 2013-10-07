@@ -34,6 +34,7 @@ public class Trolley {
     }
     
     public int getPayLoad(){
+        System.out.println("total weigth:"+totalWeight+"\n own weight: "+ownWeight);
         return totalWeight - ownWeight; 
     }
    
