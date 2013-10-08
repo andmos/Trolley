@@ -62,7 +62,7 @@ public class MainMenu {
         logoPanel.setPreferredSize(new Dimension(trolleyApp.getWidth(),140));
         logoPanel.setBackground(Color.white);
         JLabel logo = new JLabel();
-        ImageIcon image = new ImageIcon(this.getClass().getResource("/res/posten.jpg"));
+        ImageIcon image = new ImageIcon(this.getClass().getResource("/res/posten_bkup.jpg"));
         logo.setIcon(image);
         logoPanel.add(logo);
         trolleyApp.add(logoPanel,BorderLayout.NORTH); //Add to main panel.
