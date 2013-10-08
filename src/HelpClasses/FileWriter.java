@@ -71,8 +71,6 @@ public class FileWriter {
             System.out.println("Error while writing to file " + e.getMessage());
 
         }
-        return "Coult not read file!";  
+        return "Coult not read file!";
     }
-  
 }
-
