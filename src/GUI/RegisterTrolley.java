@@ -73,7 +73,6 @@ public class RegisterTrolley {
      * Sets up the flightroute information screen.
      */
     private void flightRouteSetup(){
-        //ENDRE TIL TEXTFIELD HVIS 99
         flightRoutePanel.setLayout(new GridBagLayout());
         flightRoutePanel.setPreferredSize(new Dimension(trolleyApp.getWidth(),120));
         flightRoutePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -82,7 +81,14 @@ public class RegisterTrolley {
         GridBagConstraints c = new GridBagConstraints();
         JLabel label;
    
-        c.gridy = 1;
+        c.gridx=0;
+        c.gridy=0;
+        JLabel logo = new JLabel();
+        ImageIcon image = new ImageIcon(this.getClass().getResource("/res/plane.png"));
+        logo.setIcon(image);
+        flightRoutePanel.add(logo,c);
+        
+        c.gridy = 2;
         c.gridx = 0;
         label = new JLabel("Rute nr :");
         flightRoutePanel.add(label,c);
@@ -95,7 +101,7 @@ public class RegisterTrolley {
         routeNr.disable();
         flightRoutePanel.add(routeNr,c);
         
-        c.gridy = 2;
+        c.gridy = 3;
         c.gridx = 0;
         label = new JLabel("Destinasjon :");
         flightRoutePanel.add(label,c);
@@ -107,7 +113,7 @@ public class RegisterTrolley {
         destination.disable();
         flightRoutePanel.add(destination,c);
         
-        c.gridy = 0;
+        c.gridy = 1;
         c.gridx = 0;
         label = new JLabel("Fly nr :");
         flightRoutePanel.add(label,c);
@@ -129,21 +135,28 @@ public class RegisterTrolley {
         GridBagConstraints c = new GridBagConstraints();
         JLabel label;
         
+        c.gridx =0;
+        c.gridy=0;
+        JLabel logo = new JLabel();
+        ImageIcon image = new ImageIcon(this.getClass().getResource("/res/trolley.png"));
+        logo.setIcon(image);
+        trolleyPanel.add(logo,c);
+        
         label = new JLabel("Egenvekt :");
         c.gridx = 0;
-        c.gridy = 2;
+        c.gridy = 3;
         trolleyPanel.add(label,c);
         
         JTextField ownWeight = new JTextField(trolleyApp.xmlp.getTrolleys().get(0).getOwnWeight()+"",5);
         c.gridx = 1;
-        c.gridy=2;
+        c.gridy=3;
         ownWeight.disable();
         trolleyPanel.add(ownWeight,c);
         trolleyApp.add(trolleyPanel,BorderLayout.CENTER);
         
         label = new JLabel("Vogn nr :");
         c.gridx = 0;
-        c.gridy = 0;
+        c.gridy = 1;
         trolleyPanel.add(label,c);
         
         activeTrolleyId = trolleyApp.xmlp.getTrolleys().get(0).getTrolleyId();
@@ -163,6 +176,13 @@ public class RegisterTrolley {
         GridBagConstraints c = new GridBagConstraints();
         JLabel label;
         
+        c.gridx =0;
+        c.gridy=0;
+        JLabel logo = new JLabel();
+        ImageIcon image = new ImageIcon(this.getClass().getResource("/res/weight.png"));
+        logo.setIcon(image);
+        basisPanel.add(logo,c);
+        
         //Predefined loadweigth to use inside totalweight listener
         final JLabel loadWeigth = new JLabel("",10);
         loadWeigth.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.BLACK));
@@ -174,12 +194,12 @@ public class RegisterTrolley {
         //Total weigth
         label = new JLabel("Skriv inn totalvekt :");
         c.gridx = 0;
-        c.gridy=0;
+        c.gridy=1;
         basisPanel.add(label,c);
         
         final JTextField totalWeigth = new JTextField(3);
         c.gridx = 1;
-        c.gridy=0;
+        c.gridy=1;
         totalWeigth.addKeyListener(new KeyListener() {
 
             @Override
@@ -188,7 +208,6 @@ public class RegisterTrolley {
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    System.out.println("jaij");
                     for (Trolley t:trolleyApp.xmlp.getTrolleys()){
                         if(activeTrolleyId==t.getTrolleyId()){
                         t.setTotalWeight(Integer.parseInt(totalWeigth.getText()));
@@ -209,18 +228,18 @@ public class RegisterTrolley {
         //Own weigth
         label = new JLabel("- egenvekt");
         c.gridx = 0;
-        c.gridy = 1;
+        c.gridy = 2;
         basisPanel.add(label,c);
         
         basisPanelOwnWeigth = new JLabel(trolleyApp.xmlp.getTrolleys().get(0).getOwnWeight()+" kg");
         c.gridx = 1;
-        c.gridy = 1;
+        c.gridy = 2;
         basisPanel.add(basisPanelOwnWeigth,c);
         
         //Load weigth
         label = new JLabel("LASTVEKT :");
         c.gridx = 0;
-        c.gridy = 2;
+        c.gridy = 3;
         c.insets = new Insets(10, 0, 0, 0);
         label.setFont(new Font("Ariel", Font.BOLD, 14));
         label.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.BLACK));
@@ -233,7 +252,7 @@ public class RegisterTrolley {
         btn.setForeground(Color.red);
         c.gridx = 0;
         c.gridy=3;
-        c.insets = new Insets(50, 0, 0, 100);
+        c.insets = new Insets(70, 0, 0, 100);
         btn.addMouseListener(new MouseListener() {
 
             @Override
@@ -264,7 +283,7 @@ public class RegisterTrolley {
         btn.setForeground(Color.green);
         c.gridx = 1;
         c.gridy=3;
-        c.insets = new Insets(50, 100, 0, 0);
+        c.insets = new Insets(70, 100, 0, 0);
         basisPanel.add(btn,c);
         
         trolleyApp.add(basisPanel,BorderLayout.SOUTH);
