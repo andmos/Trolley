@@ -6,13 +6,12 @@ package HelpClasses;
 
 import org.jasypt.util.password.*;
  
-import java.util.*;
 /**
  *
  * @author andreasmosti
  */
 public class PasswordHandeling {
-    private static final String userpass = "testpass";
+    private static final String userpass = "testpass"; 
     private FileWriter fileWriter = new FileWriter(); 
     private String fileName = "passord.txt"; 
     
@@ -35,7 +34,7 @@ public class PasswordHandeling {
     }
  
     public void storePasswordForUser(String hashedPassword){
-        fileWriter.writeStringToFile(hashedPassword);
+        fileWriter.writeSimpleStringToFile(hashedPassword);
     }
  
     public String getPasswordFromFile(){

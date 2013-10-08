@@ -26,7 +26,7 @@ public class FileWriter {
         f = new File(filename);
     }
 
-    public void writeStringToFile(String string) {
+    public void writeSimpleStringToFile(String string) {
         PrintStream out = null;
         try {
             out = new PrintStream(new FileOutputStream(f));
@@ -68,9 +68,9 @@ public class FileWriter {
             reader.close();
             return fileData.toString();
         } catch (IOException e) {
-            System.out.println("Error while writing to file " + e.getMessage());
-
+            System.out.println("Error while reading from file " + e.getMessage());
+            return "Coult not read file!";
         }
-        return "Coult not read file!";
+        
     }
 }
