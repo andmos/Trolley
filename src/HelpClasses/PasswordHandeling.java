@@ -20,8 +20,7 @@ public class PasswordHandeling {
         fileWriter.setFileName(fileName);
     } 
     
-    public String encryptPassword()
-    {
+    public String encryptPassword() {
         StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
         String encryptedPassword = passwordEncryptor.encryptPassword(userpass);
         storePasswordForUser(encryptedPassword);
@@ -29,15 +28,13 @@ public class PasswordHandeling {
     }
  
  
-    public boolean checkPassword(String submittedPassword)
-    {
+    public boolean checkPassword(String submittedPassword){
        StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
        String encryptedPassword = getPasswordFromFile();
         return passwordEncryptor.checkPassword(submittedPassword, encryptedPassword);
     }
  
-    public void storePasswordForUser(String hashedPassword)
-    {
+    public void storePasswordForUser(String hashedPassword){
         fileWriter.writeStringToFile(hashedPassword);
     }
  
