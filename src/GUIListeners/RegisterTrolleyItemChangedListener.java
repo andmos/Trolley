@@ -38,11 +38,14 @@ public class RegisterTrolleyItemChangedListener implements ItemListener{
         if(comboBox.getName().equals("flightnr")){ //Do something to flight panel
          if (e.getStateChange() == ItemEvent.SELECTED) {
              int flightNr = Integer.parseInt(e.getItem().toString());
+             registertrolley.flightroute.setFlightNr(flightNr);
              if(flightNr!=99){
              for(FlightRoute f:registertrolley.trolleyApp.xmlp.getFlightRoutes())
                 if(f.getFlightNr() ==(flightNr)){
                     routeNr.setText(f.getFlightRouteNr());
                     destination.setText(f.getDestination());
+                    registertrolley.flightroute.setFlightRouteNr(f.getFlightRouteNr());
+                    registertrolley.flightroute.setDestination(f.getDestination());
                     routeNr.disable();
                     destination.disable();
                 }
@@ -62,6 +65,7 @@ public class RegisterTrolleyItemChangedListener implements ItemListener{
                         if(t.getTrolleyId()==trolleyId){
                             ownWeight.setText(t.getOwnWeight()+" kg");
                             registertrolley.basisPanelOwnWeigth.setText(ownWeight.getText());
+                            registertrolley.trolley = new Trolley(trolleyId, t.getOwnWeight());
                             ownWeight.disable();
                         }
                     }

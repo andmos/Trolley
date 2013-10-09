@@ -5,7 +5,9 @@
 package TrolleyRegistration;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -13,9 +15,9 @@ import java.util.Date;
  */
 public class Flight {
         
-        FlightRoute flightRoute; 
-        ArrayList<Trolley> trolleysOnFlight = new ArrayList<Trolley>(); 
-        Date timestamp;  // in use with tag
+        public FlightRoute flightRoute; 
+        public ArrayList<Trolley> trolleysOnFlight = new ArrayList<Trolley>(); 
+        public Calendar timestamp;  // in use with tag
         
         public Flight(FlightRoute flightRoute){
             this.flightRoute = flightRoute; 
@@ -45,6 +47,10 @@ public class Flight {
                 res += t.toString() + '\n'; 
             }
             return res; 
+        }
+        
+        public void setTimeStamp(){
+            timestamp = new GregorianCalendar();
         }
         
         @Override

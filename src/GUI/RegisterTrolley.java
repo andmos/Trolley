@@ -4,6 +4,7 @@ package GUI;
 
 import GUIListeners.RegisterTrolleyItemChangedListener;
 import GUIListeners.RegisterTrolleyKeyListener;
+import TrolleyRegistration.Flight;
 import TrolleyRegistration.FlightRoute;
 import TrolleyRegistration.Trolley;
 import java.awt.BorderLayout;
@@ -41,6 +42,9 @@ public class RegisterTrolley {
     public Integer[] trolleyIds;
     public JLabel basisPanelOwnWeigth;
     public int activeTrolleyId;
+    public Flight flight;
+    public FlightRoute flightroute;
+    public Trolley trolley;
     
     public RegisterTrolley(TrolleyApp trolleyApp) {
         this.trolleyApp = trolleyApp;
@@ -70,13 +74,13 @@ public class RegisterTrolley {
         
     }
     /**
-     * Sets up the flightroute information screen.
+     * Sets up the flight route information screen.
      */
     private void flightRouteSetup(){
         flightRoutePanel.setLayout(new GridBagLayout());
         flightRoutePanel.setPreferredSize(new Dimension(trolleyApp.getWidth(),120));
         flightRoutePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
+        flightRoutePanel.setBackground(Color.white);
         
         GridBagConstraints c = new GridBagConstraints();
         JLabel label;
@@ -93,7 +97,8 @@ public class RegisterTrolley {
         label = new JLabel("Rute nr :");
         flightRoutePanel.add(label,c);
         c.gridx = 1;
-        JTextField routeNr = new JTextField(trolleyApp.xmlp.getFlightRoutes().get(0).getFlightRouteNr(),10);
+        String tempRouteNr = trolleyApp.xmlp.getFlightRoutes().get(0).getFlightRouteNr();
+        JTextField routeNr = new JTextField(tempRouteNr,10);
         routeNr.setName("routeNr");
         RegisterTrolleyKeyListener keylistener = new RegisterTrolleyKeyListener(this);
         keylistener.setRouteNr(routeNr);
@@ -106,7 +111,8 @@ public class RegisterTrolley {
         label = new JLabel("Destinasjon :");
         flightRoutePanel.add(label,c);
         c.gridx = 1;
-        JTextField destination = new JTextField(trolleyApp.xmlp.getFlightRoutes().get(0).getDestination(),10);
+        String tempDestination = trolleyApp.xmlp.getFlightRoutes().get(0).getDestination();
+        JTextField destination = new JTextField(tempDestination,10);
         destination.setName("destination");
         keylistener.setDestination(destination);
         destination.addKeyListener(keylistener);
@@ -126,12 +132,19 @@ public class RegisterTrolley {
         flightNr.setMinimumSize(new Dimension(200, 20));
         flightRoutePanel.add(flightNr,c);
         trolleyApp.add(flightRoutePanel,BorderLayout.NORTH); //Add panel to main application
+        
+        //Add the temporary flight route and flightroute
+        flightroute = new FlightRoute(flightNrs[0], tempRouteNr , tempDestination);
+        flight = new Flight(flightroute);
+
+        
     }
     
     private void trolleyPanelSetup(){
         trolleyPanel.setLayout(new GridBagLayout());
         trolleyPanel.setPreferredSize(new Dimension(trolleyApp.getWidth(),150));
         trolleyPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        trolleyPanel.setBackground(Color.white);
         GridBagConstraints c = new GridBagConstraints();
         JLabel label;
         
@@ -146,8 +159,8 @@ public class RegisterTrolley {
         c.gridx = 0;
         c.gridy = 3;
         trolleyPanel.add(label,c);
-        
-        JTextField ownWeight = new JTextField(trolleyApp.xmlp.getTrolleys().get(0).getOwnWeight()+"",5);
+        int tempOwnWeigth = trolleyApp.xmlp.getTrolleys().get(0).getOwnWeight();
+        JTextField ownWeight = new JTextField(tempOwnWeigth+" kg",5);
         c.gridx = 1;
         c.gridy=3;
         ownWeight.disable();
@@ -166,6 +179,7 @@ public class RegisterTrolley {
         trolleys.addItemListener(new RegisterTrolleyItemChangedListener(trolleys, this,ownWeight));
         trolleyPanel.add(trolleys,c);
         
+        trolley = new Trolley(activeTrolleyId, tempOwnWeigth);
         
     }
     
@@ -173,6 +187,7 @@ public class RegisterTrolley {
         basisPanel.setLayout(new GridBagLayout());
         basisPanel.setPreferredSize(new Dimension(trolleyApp.getWidth(),350));
         basisPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        basisPanel.setBackground(Color.WHITE);
         GridBagConstraints c = new GridBagConstraints();
         JLabel label;
         
@@ -187,7 +202,7 @@ public class RegisterTrolley {
         final JLabel loadWeigth = new JLabel("",10);
         loadWeigth.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.BLACK));
         c.gridx = 1;
-        c.gridy = 2;
+        c.gridy = 3;
         c.insets = new Insets(9, 0, 0, 0);
         basisPanel.add(loadWeigth,c);
         
@@ -209,9 +224,9 @@ public class RegisterTrolley {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
                     for (Trolley t:trolleyApp.xmlp.getTrolleys()){
-                        if(activeTrolleyId==t.getTrolleyId()){
-                        t.setTotalWeight(Integer.parseInt(totalWeigth.getText()));
-                        loadWeigth.setText(t.getPayLoad()+" kg");
+                        if(trolley.getTrolleyId()==t.getTrolleyId()){
+                        trolley.setTotalWeight(Integer.parseInt(totalWeigth.getText()));
+                        loadWeigth.setText(trolley.getPayLoad()+" kg");
                     }
                     }
                     trolleyApp.revalidate();
@@ -231,7 +246,7 @@ public class RegisterTrolley {
         c.gridy = 2;
         basisPanel.add(label,c);
         
-        basisPanelOwnWeigth = new JLabel(trolleyApp.xmlp.getTrolleys().get(0).getOwnWeight()+" kg");
+        basisPanelOwnWeigth = new JLabel(trolley.getOwnWeight()+" kg");
         c.gridx = 1;
         c.gridy = 2;
         basisPanel.add(basisPanelOwnWeigth,c);
@@ -252,7 +267,7 @@ public class RegisterTrolley {
         btn.setForeground(Color.red);
         c.gridx = 0;
         c.gridy=3;
-        c.insets = new Insets(70, 0, 0, 100);
+        c.insets = new Insets(100, 0, 0, 120);
         btn.addMouseListener(new MouseListener() {
 
             @Override
@@ -281,11 +296,52 @@ public class RegisterTrolley {
         //OK button
         btn = new JButton("Fortsett");
         btn.setForeground(Color.green);
+        btn.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                    flight.addTrolleyToFlight(trolley);
+                    if(trolley.getPayLoad()<=0){
+                        JOptionPane.showMessageDialog(null, "Du må fylle inn totalvekt.");
+                    }else{
+                        flight.setTimeStamp();
+                        Object[] valgene = {"Ja","Nei"};
+                   int valg = JOptionPane.showOptionDialog(null, //Component parentComponent
+                               "Vil du vise tag?", //Object message,
+                               "Ta et valg", //String title
+                               JOptionPane.YES_NO_OPTION, //int optionType
+                               JOptionPane.INFORMATION_MESSAGE, //int messageType
+                               null, //Icon icon,
+                               valgene, //Object[] options,
+                               "Ja");//Object initialValue
+                   if(valg==0){ //Vise tag
+                       new Tag(trolleyApp,flight,trolley);
+                   }else{ //Ikke vise tag
+                       new MainMenu(trolleyApp);
+                   }
+                    }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
         c.gridx = 1;
         c.gridy=3;
-        c.insets = new Insets(70, 100, 0, 0);
+        c.insets = new Insets(100, 120, 0, 0);
         basisPanel.add(btn,c);
-        
         trolleyApp.add(basisPanel,BorderLayout.SOUTH);
     }
 }
