@@ -229,7 +229,6 @@ public class Tag{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                new RegisterTrolley(trolleyApp);
             }
         };
     }
