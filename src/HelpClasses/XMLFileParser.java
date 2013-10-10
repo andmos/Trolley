@@ -34,8 +34,8 @@ private ArrayList<FlightRoute> flightRoutes = new ArrayList<FlightRoute>();
 public XMLFileParser() {
         try{
             //TODO: Add the rest of the XML files.    
-            trolleys = getTrolleysFromeFile();
-            flightRoutes = getFlightRoutesFromFile();
+            trolleys = getTrolleysFromXMLFile();
+            flightRoutes = getFlightRoutesFromXMLFile();
             
         }catch(Exception e){
             e.printStackTrace();
@@ -52,13 +52,12 @@ public XMLFileParser() {
         return flightRoutes; 
     }
     
-    public void writeTrolleysToXMLFile(ArrayList<Trolley> trolleys) {
-        //TODO: Write to XML if you change them.
-        this.trolleys = trolleys;
-    }
+   public void WriteFlightReportToXMLFile(){
+       
+   }
     
 
-    private ArrayList<Trolley> getTrolleysFromeFile() throws Exception {
+    private ArrayList<Trolley> getTrolleysFromXMLFile() throws Exception {
         ArrayList<Trolley> tempTrolley = new ArrayList<Trolley>();
         File xmlfile = new File(TrolleysPath);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -80,7 +79,7 @@ public XMLFileParser() {
             return tempTrolley;        
     }
     
-    private ArrayList<FlightRoute> getFlightRoutesFromFile() throws Exception {
+    private ArrayList<FlightRoute> getFlightRoutesFromXMLFile() throws Exception {
         ArrayList<FlightRoute> tempFlightRoute = new ArrayList<FlightRoute>();
         File xmlfile = new File(FlightRoutePath);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
