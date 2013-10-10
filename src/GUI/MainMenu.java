@@ -186,8 +186,9 @@ public class MainMenu {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                new FlightList();
-                removeActions();
+                JOptionPane.showMessageDialog(null, "Se flyliste/rapport kommer senere");
+                trolleyApp.requestFocus();
+                //removeActions();
             }
         };
         goToChangeFlightRoute = new AbstractAction() {
@@ -195,7 +196,8 @@ public class MainMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Endre flyrute kommer senere");
-                removeActions();
+                trolleyApp.requestFocus();
+                //removeActions();
             }
         };
         goToAddFlightRoute = new AbstractAction() {
@@ -203,7 +205,8 @@ public class MainMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Legge til flyrute kommer senere");
-                removeActions();
+                trolleyApp.requestFocus();
+                //removeActions();
             }
         };
     }
