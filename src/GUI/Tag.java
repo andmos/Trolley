@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -26,22 +27,25 @@ import java.util.Calendar;
 import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+import javax.swing.border.MatteBorder;
 
 /**
  *
  * @author haavamoa
  */
-public class Tag implements Printable{
+public class Tag{
 
-    private TrolleyApp trolleyApp;
+    public TrolleyApp trolleyApp;
     private Flight flight;
     private Trolley trolley;
     private JPanel routePanel = new JPanel();
     private JPanel weigthDatePanel = new JPanel();
     private JPanel buttonPanel = new JPanel();
+    public JButton print;
     
     public Tag(TrolleyApp trolleyApp,Flight flight,Trolley trolley) {
         this.flight = flight;
@@ -63,7 +67,7 @@ public class Tag implements Printable{
         routePanel.setLayout(new BorderLayout());
         routePanel.setBackground(Color.white);
         routePanel.setPreferredSize(new Dimension(50, 100));
-        routePanel.setBorder(BorderFactory.createRaisedBevelBorder());
+     //   routePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         GridBagConstraints c = new GridBagConstraints();
         
         //Route panel inside route panel.
@@ -108,7 +112,7 @@ public class Tag implements Printable{
         weigthDatePanel.setBackground(Color.white);
         weigthDatePanel.setPreferredSize(new Dimension(trolleyApp.getWidth(), 70));
         weigthDatePanel.setLayout(new GridBagLayout());
-        weigthDatePanel.setBorder(BorderFactory.createRaisedBevelBorder());
+        weigthDatePanel.setBorder(new MatteBorder(2, 0, 2, 0, Color.BLACK));
         GridBagConstraints c = new GridBagConstraints();
         
         //Load weigth
@@ -145,18 +149,13 @@ public class Tag implements Printable{
         c.gridx = 0;
         c.gridy = 0;
         //Print button
-        btn = new JButton("Print tag");
-        btn.addMouseListener(new TagMouseListener(this));
-        buttonPanel.add(btn,c);
+        print= new JButton("Print tag");
+        print.addMouseListener(new TagMouseListener(this));
+        buttonPanel.add(print,c);
         
         //Cancel button
         trolleyApp.add(buttonPanel,BorderLayout.SOUTH);
     }
-
-    @Override
-    public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
-        System.out.println("jaij");
-        return 0;
     }
     
-}
+

@@ -197,7 +197,8 @@ public class RegisterTrolley {
         ImageIcon image = new ImageIcon(this.getClass().getResource("/res/weight.png"));
         logo.setIcon(image);
         basisPanel.add(logo,c);
-        
+        //Predefined OK Button to use in totalweigth listener
+        final JButton okBtn = new JButton("Fortsett");
         //Predefined loadweigth to use inside totalweight listener
         final JLabel loadWeigth = new JLabel("",10);
         loadWeigth.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.BLACK));
@@ -205,6 +206,14 @@ public class RegisterTrolley {
         c.gridy = 3;
         c.insets = new Insets(9, 0, 0, 0);
         basisPanel.add(loadWeigth,c);
+        
+        //Total weigth icon
+        c.gridx =2;
+        c.gridy=3;
+        logo = new JLabel();
+        image = new ImageIcon(this.getClass().getResource("/res/notOK.png"));
+        logo.setIcon(image);
+        basisPanel.add(logo,c);
         
         //Total weigth
         label = new JLabel("Skriv inn totalvekt :");
@@ -229,9 +238,11 @@ public class RegisterTrolley {
                         loadWeigth.setText(trolley.getPayLoad()+" kg");
                     }
                     }
-                    trolleyApp.revalidate();
-                    trolleyApp.repaint();
+                    
+                }else{
                 }
+                trolleyApp.revalidate();
+                trolleyApp.repaint();
             }
 
             @Override
@@ -294,9 +305,8 @@ public class RegisterTrolley {
         basisPanel.add(btn,c);
         
         //OK button
-        btn = new JButton("Fortsett");
-        btn.setForeground(Color.green);
-        btn.addMouseListener(new MouseListener() {
+        okBtn.setForeground(Color.green);
+        okBtn.addMouseListener(new MouseListener() {
 
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -341,7 +351,7 @@ public class RegisterTrolley {
         c.gridx = 1;
         c.gridy=3;
         c.insets = new Insets(100, 120, 0, 0);
-        basisPanel.add(btn,c);
+        basisPanel.add(okBtn,c);
         trolleyApp.add(basisPanel,BorderLayout.SOUTH);
     }
 }
