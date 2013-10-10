@@ -317,7 +317,7 @@ public class RegisterTrolley {
                         flight.setTimeStamp();
                         Object[] valgene = {"Ja","Nei"};
                    int valg = JOptionPane.showOptionDialog(null, //Component parentComponent
-                               "Vil du vise tag?", //Object message,
+                               "Vil du printe tag?", //Object message,
                                "Ta et valg", //String title
                                JOptionPane.YES_NO_OPTION, //int optionType
                                JOptionPane.INFORMATION_MESSAGE, //int messageType
