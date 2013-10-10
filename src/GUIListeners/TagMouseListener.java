@@ -5,6 +5,8 @@
 package GUIListeners;
 
 import GUI.Tag;
+import java.awt.Component;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
@@ -17,6 +19,8 @@ import static java.awt.print.Printable.NO_SUCH_PAGE;
 import static java.awt.print.Printable.PAGE_EXISTS;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -39,7 +43,7 @@ public class TagMouseListener implements MouseListener{
           return(NO_SUCH_PAGE);
         } else {
           Graphics2D g2d = (Graphics2D)graphics;
-          g2d.translate(pageFormat.getImageableX()-30, pageFormat.getImageableY()); //Setter y rettning litt mindre for å få det midstilt
+          g2d.translate(pageFormat.getImageableX()-20, pageFormat.getImageableY()); //Setter y rettning litt mindre for å få det midstilt
           g2d.scale(.65, .65); //0.65 ganger i forhold til applikasjonen.
           // Turn off double buffering
           tag.print.hide();
