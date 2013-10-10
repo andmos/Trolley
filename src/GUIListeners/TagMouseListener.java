@@ -48,8 +48,10 @@ public class TagMouseListener implements MouseListener{
         //Pushing the size up for printing
           for(Component c:tag.weigthDatePanel.getComponents())
               if(c instanceof JLabel){
-                  if(!((JLabel)c).getText().contains("Destinasjon") && !((JLabel)c).getText().contains("vekt")){
-                      c.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
+                      if(((JLabel)c).getText().equals(tag.flight.flightRoute.getDestination()))
+                        c.setFont(new Font(Font.MONOSPACED, Font.BOLD, 100));
+                      else if(((JLabel)c).getText().equals(tag.flight.flightRoute.getFlightNr())){
+                          c.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
                   }
               }  
           // Turn off double buffering

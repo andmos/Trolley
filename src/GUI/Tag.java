@@ -40,8 +40,8 @@ import javax.swing.border.MatteBorder;
 public class Tag{
 
     public TrolleyApp trolleyApp;
-    private Flight flight;
-    private Trolley trolley;
+    public Flight flight;
+    public Trolley trolley;
     public JPanel routePanel = new JPanel();
     public JPanel weigthDatePanel = new JPanel();
     public JPanel buttonPanel = new JPanel();
@@ -133,7 +133,7 @@ public class Tag{
         c.insets = new Insets(60, 0, 0, 0);
         c.gridx = 0;
         c.gridy = 3;
-        weigthDatePanel.add(new JLabel("Last vekt :"),c);
+        weigthDatePanel.add(new JLabel("Lastvekt :"),c);
         c.insets = new Insets(0, 0, 0, 0);
         c.gridx = 0;
         c.gridy = 4;
