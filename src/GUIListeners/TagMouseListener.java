@@ -4,8 +4,10 @@
  */
 package GUIListeners;
 
+import GUI.MainMenu;
 import GUI.Tag;
 import java.awt.Component;
+import java.awt.Dialog;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -35,6 +37,7 @@ public class TagMouseListener implements MouseListener{
     @Override
     public void mouseClicked(MouseEvent e) {
   PrinterJob printJob = PrinterJob.getPrinterJob();
+  printJob.setJobName("Utskrift av tralleseddel");
     printJob.setPrintable(new Printable() {
 
       @Override
@@ -66,6 +69,7 @@ public class TagMouseListener implements MouseListener{
     if (printJob.printDialog()){
       try {
         printJob.print();
+        new MainMenu(tag.trolleyApp);
       } catch(PrinterException pe) {
         System.out.println("Error printing: " + pe);
       }

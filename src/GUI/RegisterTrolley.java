@@ -45,6 +45,11 @@ public class RegisterTrolley {
     public Flight flight;
     public FlightRoute flightroute;
     public Trolley trolley;
+    private JLabel loadWeigth;
+    private JTextField  totalWeigth;
+    private Action back;
+    private Action next;
+    private Action calculateTotalWeigth;
     
     public RegisterTrolley(TrolleyApp trolleyApp) {
         this.trolleyApp = trolleyApp;
@@ -67,7 +72,8 @@ public class RegisterTrolley {
         }
         trolleyIds[trolleys.size()] = 99; //Always add trolleysid 99 for user input
         flightNrs[flights.size()] = 99; //Always add flight nr 99 for user input
-        
+        setActions();
+        setActionBindings();
         flightRouteSetup();
         trolleyPanelSetup();
         basisPanelSetup();
@@ -97,7 +103,7 @@ public class RegisterTrolley {
         label = new JLabel("Rute nr :");
         flightRoutePanel.add(label,c);
         c.gridx = 1;
-        String tempRouteNr = "";
+        String tempRouteNr = trolleyApp.xmlp.getFlightRoutes().get(0).getFlightRouteNr();
         JTextField routeNr = new JTextField(tempRouteNr,10);
         routeNr.setName("routeNr");
         RegisterTrolleyKeyListener keylistener = new RegisterTrolleyKeyListener(this);
@@ -197,16 +203,18 @@ public class RegisterTrolley {
         ImageIcon image = new ImageIcon(this.getClass().getResource("/res/weight.png"));
         logo.setIcon(image);
         basisPanel.add(logo,c);
+        
         //Predefined OK Button to use in totalweigth listener
         final JButton okBtn = new JButton("Fortsett");
         //Predefined loadweigth to use inside totalweight listener
-        final JLabel loadWeigth = new JLabel("",10);
+        loadWeigth = new JLabel("",10);
         loadWeigth.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.BLACK));
         c.gridx = 1;
         c.gridy = 3;
         c.insets = new Insets(9, 0, 0, 0);
         basisPanel.add(loadWeigth,c);
         
+        /*
         //Total weigth icon
         c.gridx =2;
         c.gridy=3;
@@ -214,6 +222,7 @@ public class RegisterTrolley {
         image = new ImageIcon(this.getClass().getResource("/res/notOK.png"));
         logo.setIcon(image);
         basisPanel.add(logo,c);
+        * */
         
         //Total weigth
         label = new JLabel("Skriv inn totalvekt :");
@@ -221,34 +230,9 @@ public class RegisterTrolley {
         c.gridy=1;
         basisPanel.add(label,c);
         
-        final JTextField totalWeigth = new JTextField(3);
+        totalWeigth = new JTextField(3);
         c.gridx = 1;
         c.gridy=1;
-        totalWeigth.addKeyListener(new KeyListener() {
-
-            @Override
-            public void keyTyped(KeyEvent e) {
-            }
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    for (Trolley t:trolleyApp.xmlp.getTrolleys()){
-                        if(trolley.getTrolleyId()==t.getTrolleyId()){
-                        trolley.setTotalWeight(Integer.parseInt(totalWeigth.getText()));
-                        loadWeigth.setText(trolley.getPayLoad()+" kg");
-                    }
-                    }
-                    
-                }else{
-                }
-                trolleyApp.revalidate();
-                trolleyApp.repaint();
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-            }
-        });
         basisPanel.add(totalWeigth,c);
         
         //Own weigth
@@ -274,43 +258,42 @@ public class RegisterTrolley {
         JButton btn;
         
         //BACK button
-        btn = new JButton("Tilbake");
+        btn = new JButton(back);
+        btn.setText("Tilbake");
         btn.setForeground(Color.red);
         c.gridx = 0;
         c.gridy=3;
         c.insets = new Insets(100, 0, 0, 120);
-        btn.addMouseListener(new MouseListener() {
-
-            @Override
-            public void mouseClicked(MouseEvent me) {
-                new MainMenu(trolleyApp);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent me) {
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent me) {
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent me) {
-            }
-
-            @Override
-            public void mouseExited(MouseEvent me) {
-            }
-        });
         basisPanel.add(btn,c);
         
         //OK button
-        okBtn.setForeground(Color.green);
-        okBtn.addMouseListener(new MouseListener() {
+        btn = new JButton(next);
+        btn.setText("Fortsett");
+        btn.setForeground(Color.green);
+        c.gridx = 1;
+        c.gridy=3;
+        c.insets = new Insets(100, 120, 0, 0);
+        basisPanel.add(btn,c);
+        trolleyApp.add(basisPanel,BorderLayout.SOUTH);
+    }
+    private void setActionBindings(){
+        String action,key;
+        
+    }
+    
+    private void setActions(){
+        back = new AbstractAction() {
 
             @Override
-            public void mouseClicked(MouseEvent e) {
-                    flight.addTrolleyToFlight(trolley);
+            public void actionPerformed(ActionEvent e) {
+                new MainMenu(trolleyApp);
+            }
+        };
+        next = new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                  flight.addTrolleyToFlight(trolley);
                     if(trolley.getPayLoad()<=0){
                         JOptionPane.showMessageDialog(null, "Du må fylle inn totalvekt.");
                     }else{
@@ -331,27 +314,24 @@ public class RegisterTrolley {
                    }
                     }
             }
+        };
+        calculateTotalWeigth = new AbstractAction() {
 
             @Override
-            public void mousePressed(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
-        });
-        c.gridx = 1;
-        c.gridy=3;
-        c.insets = new Insets(100, 120, 0, 0);
-        basisPanel.add(okBtn,c);
-        trolleyApp.add(basisPanel,BorderLayout.SOUTH);
+            public void actionPerformed(ActionEvent e) {
+                                    for (Trolley t:trolleyApp.xmlp.getTrolleys()){
+                        if(trolley.getTrolleyId()==t.getTrolleyId()){
+                        trolley.setTotalWeight(Integer.parseInt(totalWeigth.getText()));
+                        loadWeigth.setText(trolley.getPayLoad()+" kg");
+                    }
+                    }
+                    trolleyApp.revalidate();
+                    trolleyApp.repaint();
+                }
+                
+            };
+        };
     }
-}
+    
+    
+

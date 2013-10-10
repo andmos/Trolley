@@ -9,5 +9,9 @@ package GUI;
  * @author haavamoa
  */
 public class FlightList {
+
+    public FlightList() {
+    }
+    
     
 }

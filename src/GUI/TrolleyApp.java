@@ -4,7 +4,6 @@
  */
 package GUI;
 
-import GUIListeners.MainMenuMouseListener;
 import HelpClasses.XMLFileParser;
 import java.awt.BorderLayout;
 import java.awt.Color;
