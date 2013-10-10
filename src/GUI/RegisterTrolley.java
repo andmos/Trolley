@@ -97,7 +97,7 @@ public class RegisterTrolley {
         label = new JLabel("Rute nr :");
         flightRoutePanel.add(label,c);
         c.gridx = 1;
-        String tempRouteNr = trolleyApp.xmlp.getFlightRoutes().get(0).getFlightRouteNr();
+        String tempRouteNr = "";
         JTextField routeNr = new JTextField(tempRouteNr,10);
         routeNr.setName("routeNr");
         RegisterTrolleyKeyListener keylistener = new RegisterTrolleyKeyListener(this);

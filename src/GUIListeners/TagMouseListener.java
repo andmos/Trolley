@@ -45,6 +45,13 @@ public class TagMouseListener implements MouseListener{
           Graphics2D g2d = (Graphics2D)graphics;
           g2d.translate(pageFormat.getImageableX()-20, pageFormat.getImageableY()); //Setter y rettning litt mindre for å få det midstilt
           g2d.scale(.65, .65); //0.65 ganger i forhold til applikasjonen.
+        //Pushing the size up for printing
+          for(Component c:tag.weigthDatePanel.getComponents())
+              if(c instanceof JLabel){
+                  if(!((JLabel)c).getText().contains("Destinasjon") && !((JLabel)c).getText().contains("vekt")){
+                      c.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
+                  }
+              }  
           // Turn off double buffering
           tag.print.hide();
           tag.trolleyApp.paint(g2d);
