@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<FlightRoutes>
+    <FlightRoute flightNr="1" flightRouteNr="WF881/829(Lø)" destination="SVJ"></FlightRoute>
+    <FlightRoute flightNr="2" flightRouteNr="WF826/829(Lø)" destination="LKN"></FlightRoute>
+    <FlightRoute flightNr="4" flightRouteNr="WF701" destination="BNN"></FlightRoute>
+    <FlightRoute flightNr="5" flightRouteNr="WF701" destination="SSJ"></FlightRoute>
+    <FlightRoute flightNr="6" flightRouteNr="WF739" destination="MJF"></FlightRoute>
+    <FlightRoute flightNr="7" flightRouteNr="WF842" destination="ANX"></FlightRoute>
+</FlightRoutes>

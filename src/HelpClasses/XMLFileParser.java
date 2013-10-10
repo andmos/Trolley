@@ -25,8 +25,8 @@ import org.w3c.dom.NodeList;
  * @author haavamoa
  */
 public class XMLFileParser {
-private static String TrolleysPath = System.getProperty("user.dir")+"/DOC/Trolleys.xml";
-private static String FlightRoutePath = System.getProperty("user.dir")+"/DOC/FlightRoute.xml"; 
+private static String TrolleysPath = System.getProperty("user.dir")+"/src/res/DOC/Trolleys.xml";
+private static String FlightRoutePath = System.getProperty("user.dir")+"/src/res/DOC/FlightRoute.xml"; 
 
 private ArrayList<Trolley> trolleys = new ArrayList<Trolley>();    
 private ArrayList<FlightRoute> flightRoutes = new ArrayList<FlightRoute>(); 

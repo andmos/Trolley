@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <rapport dato="xxx"> 
+            <flightroute id="xxx" destination="yyy"> 
+                    <trolley id="vvv" totalWeight="zzz"/>
+                    <trolley id="vvv" totalWeight="zzz"/>
+                    <trolley id="vvv" totalWeight="zzz"/>
+                    <trolley id="vvv" totalWeight="zzz"/>
+            </flightroute>
+            <flightroute id="xxx" destination="yyy">
+                    <trolley id="vvv" totalWeight="zzz"/>
+                    <trolley id="vvv" totalWeight="zzz"/>
+                    <trolley id="vvv" totalWeight="zzz"/>
+                    <trolley id="vvv" totalWeight="zzz"/>
+            </flightroute>
+    </rapport>
+
+
