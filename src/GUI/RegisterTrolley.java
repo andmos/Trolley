@@ -49,7 +49,7 @@ public class RegisterTrolley {
     private JTextField  totalWeigth;
     private Action back;
     private Action next;
-    private Action calculateTotalWeigth;
+    private Action calculateLoadWeigth;
     
     public RegisterTrolley(TrolleyApp trolleyApp) {
         this.trolleyApp = trolleyApp;
@@ -278,24 +278,89 @@ public class RegisterTrolley {
     }
     private void setActionBindings(){
         String action,key;
-        
+        //Bind enter to calculate loadweight
+        action = "calculateLoadWeigth";
+        key= "ENTER";
+        trolleyApp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(key), action);
+        trolleyApp.getActionMap().put(action, calculateLoadWeigth);
+        action = "back";
+        key = "ESCAPE";
+        trolleyApp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(key), action);
+        trolleyApp.getActionMap().put(action, back);
     }
     
     private void setActions(){
+
         back = new AbstractAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 new MainMenu(trolleyApp);
+                removeActions();
             }
         };
         next = new AbstractAction() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                  flight.addTrolleyToFlight(trolley);
-                    if(trolley.getPayLoad()<=0){
-                        JOptionPane.showMessageDialog(null, "Du må fylle inn totalvekt.");
+                 goToTagAction();
+            }
+        };
+        calculateLoadWeigth = new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    if(trolley.getPayLoad()<=0 || Integer.parseInt(totalWeigth.getText())<=0 || Integer.parseInt(totalWeigth.getText()) != trolley.getTotalWeight()){
+                    for (Trolley t:trolleyApp.xmlp.getTrolleys()){
+                        if(trolley.getTrolleyId()==t.getTrolleyId()){
+                        trolley.setTotalWeight(Integer.parseInt(totalWeigth.getText()));
+                        loadWeigth.setText(trolley.getPayLoad()+" kg");
+                    }
+                    }
+                    }else{
+                        goToTagAction();
+                    }
+                    trolleyApp.revalidate();
+                    trolleyApp.repaint();
+                }catch(NumberFormatException er){
+                    JOptionPane.showMessageDialog(null, "Totalvekt på være et tall");
+                    totalWeigth.requestFocus();
+        }
+            };
+    };
+                }
+    
+    public void removeActions(){
+        back = new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        };
+        next = new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        };
+        
+        calculateLoadWeigth = new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        };
+        setActionBindings();
+    }
+    
+    public void goToTagAction(){
+         flight.addTrolleyToFlight(trolley);
+                    if(trolley.getPayLoad()<0){
+                        JOptionPane.showMessageDialog(null, "Totalvekt kan ikke være tomt");
+                        totalWeigth.requestFocus();
+                        
                     }else{
                         flight.setTimeStamp();
                         Object[] valgene = {"Ja","Nei"};
@@ -307,31 +372,17 @@ public class RegisterTrolley {
                                null, //Icon icon,
                                valgene, //Object[] options,
                                "Ja");//Object initialValue
+                   removeActions();
                    if(valg==0){ //Vise tag
                        new Tag(trolleyApp,flight,trolley);
                    }else{ //Ikke vise tag
                        new MainMenu(trolleyApp);
+                       //Legg til rapport?
                    }
                     }
-            }
-        };
-        calculateTotalWeigth = new AbstractAction() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                                    for (Trolley t:trolleyApp.xmlp.getTrolleys()){
-                        if(trolley.getTrolleyId()==t.getTrolleyId()){
-                        trolley.setTotalWeight(Integer.parseInt(totalWeigth.getText()));
-                        loadWeigth.setText(trolley.getPayLoad()+" kg");
-                    }
-                    }
-                    trolleyApp.revalidate();
-                    trolleyApp.repaint();
-                }
-                
-            };
-        };
+                    removeActions();
     }
+}
     
     
 

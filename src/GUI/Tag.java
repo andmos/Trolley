@@ -9,6 +9,7 @@ import TrolleyRegistration.Flight;
 import TrolleyRegistration.Trolley;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -16,20 +17,27 @@ import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
+import static java.awt.print.Printable.NO_SUCH_PAGE;
+import static java.awt.print.Printable.PAGE_EXISTS;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
 
@@ -46,18 +54,25 @@ public class Tag{
     public JPanel weigthDatePanel = new JPanel();
     public JPanel buttonPanel = new JPanel();
     public JButton print;
+    private Action PrintTag;
+    private Action back;
     
     public Tag(TrolleyApp trolleyApp,Flight flight,Trolley trolley) {
         this.flight = flight;
         this.trolleyApp = trolleyApp;
         this.trolley = trolley;
+        trolleyApp.requestFocus();
         trolleyApp.setLayout(new BorderLayout());
         trolleyApp.removeAll();
         trolleyApp.revalidate();
         trolleyApp.repaint();
+        setActions();
+        setActionBindings();
         routePanelSetup();
         weigthDatePanelSetup();
         buttonPanelSetup();
+        
+        
     }
     
     /**
@@ -130,7 +145,7 @@ public class Tag{
         weigthDatePanel.add(dest,c);
         
           //Load weigth
-        c.insets = new Insets(60, 0, 0, 0);
+        c.insets = new Insets(100, 0, 0, 0);
         c.gridx = 0;
         c.gridy = 3;
         weigthDatePanel.add(new JLabel("Lastvekt :"),c);
@@ -156,12 +171,79 @@ public class Tag{
         c.gridx = 0;
         c.gridy = 0;
         //Print button
-        print= new JButton("Print tag");
-        print.addMouseListener(new TagMouseListener(this));
+        print= new JButton(PrintTag);
+        print.setText("Print tag");
         buttonPanel.add(print,c);
         
         //Cancel button
         trolleyApp.add(buttonPanel,BorderLayout.SOUTH);
+    }
+    
+    public void setActions(){
+                PrintTag = new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                  PrinterJob printJob = PrinterJob.getPrinterJob();
+  printJob.setJobName("Utskrift av tralleseddel");
+    printJob.setPrintable(new Printable() {
+
+      @Override
+      public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+                   if (pageIndex > 0) {
+          return(NO_SUCH_PAGE);
+        } else {
+          Graphics2D g2d = (Graphics2D)graphics;
+          g2d.translate(pageFormat.getImageableX()-20, pageFormat.getImageableY()); //Setter y rettning litt mindre for å få det midstilt
+          g2d.scale(.65, .65); //0.65 ganger i forhold til applikasjonen.
+        //Pushing the size up for printing
+          for(Component c:weigthDatePanel.getComponents())
+              if(c instanceof JLabel){
+                      if(((JLabel)c).getText().equals(flight.flightRoute.getDestination())){
+                        c.setFont(new Font(Font.MONOSPACED, Font.BOLD, 100));
+                      }else if(((JLabel)c).getText().equals(flight.flightRoute.getFlightNr())){
+                          c.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
+                  }
+              }  
+          // Turn off double buffering
+          print.hide();
+          trolleyApp.paint(g2d);
+          print.show();
+          // Turn double buffering back on
+          return(PAGE_EXISTS);
+      }
+      }
+  });
+    if (printJob.printDialog()){
+      try {
+        printJob.print();
+        new MainMenu(trolleyApp);
+      } catch(PrinterException pe) {
+        System.out.println("Error printing: " + pe);
+      }
+      
+    }
+            }
+        };
+          back = new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new RegisterTrolley(trolleyApp);
+            }
+        };
+    }
+    public void setActionBindings(){
+          String action,key;
+        //Bind enter to calculate loadweight
+        action = "print";
+        key= "ENTER";
+        trolleyApp.getInputMap().put(KeyStroke.getKeyStroke(key), action);
+        trolleyApp.getActionMap().put(action, PrintTag);
+        action = "back";
+        key = "ESCAPE";
+        trolleyApp.getInputMap().put(KeyStroke.getKeyStroke(key), action);
+        trolleyApp.getActionMap().put(action, back);
     }
     }
     

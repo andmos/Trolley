@@ -179,6 +179,7 @@ public class MainMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new RegisterTrolley(trolleyApp);
+                removeActions();
             }
         };
         goToFlightList = new AbstractAction() {
@@ -186,6 +187,7 @@ public class MainMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new FlightList();
+                removeActions();
             }
         };
         goToChangeFlightRoute = new AbstractAction() {
@@ -193,6 +195,7 @@ public class MainMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Endre flyrute kommer senere");
+                removeActions();
             }
         };
         goToAddFlightRoute = new AbstractAction() {
@@ -200,8 +203,39 @@ public class MainMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Legge til flyrute kommer senere");
+                removeActions();
             }
         };
+    }
+    
+    private void removeActions(){
+
+        goToInnreg = new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        };
+        goToFlightList = new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        };
+        goToChangeFlightRoute = new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        };
+        
+        goToAddFlightRoute = new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        };
+        setKeyBindings();
     }
     
 }
