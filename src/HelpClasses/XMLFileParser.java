@@ -4,6 +4,7 @@
  */
 package HelpClasses;
 
+import TrolleyRegistration.FlightReport;
 import TrolleyRegistration.FlightRoute;
 import TrolleyRegistration.Trolley;
 import java.io.File;
@@ -110,7 +111,10 @@ public XMLFileParser() {
             return tempFlightRoute;        
     }
   
-    public void writeFlightReportToXML(){
+        /*
+         * THIS IS FUCKED. Make it RIGHT!!!!!
+         */
+    public void writeFlightReportToXML(FlightReport report){
         	try {
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -121,37 +125,39 @@ public XMLFileParser() {
 		doc.appendChild(reportElement);
                 
                 Attr ReportDate = doc.createAttribute("Date"); 
-                ReportDate.setValue("Dato on created");
+                ReportDate.setValue(report.getDateStamp().toString());
                 reportElement.setAttributeNode(ReportDate); 
                 
                 
 		// staff elements
 		Element flightrouteElement = doc.createElement("Flightroute");
 		reportElement.appendChild(flightrouteElement);
- 
+                for(int i = 0; i < report.getAllFlights().size(); i++){
 		// set attribute to Flighroute element: 
 		Attr idAttribute = doc.createAttribute("Id");
-		idAttribute.setValue("1");
+		idAttribute.setValue(report.getAllFlights().get(i).getFlightRoute().getFlightRouteNr());
 		flightrouteElement.setAttributeNode(idAttribute);
- 
+                
                 
                 Attr destinationAttribute = doc.createAttribute("Destination");
-                destinationAttribute.setValue("SVN");
+                destinationAttribute.setValue(report.getAllFlights().get(i).getFlightRoute().getDestination());
                 flightrouteElement.setAttributeNode(destinationAttribute); 
-                
+                }
 		
 		// trolley elements
 		Element trolleyElement = doc.createElement("Trolley");
 		flightrouteElement.appendChild(trolleyElement);
                 
                 //set ID attribute to Trolley element: 
+                
                 Attr trolleyIdAttribute = doc.createAttribute("Id");
-                trolleyIdAttribute.setValue("1");
+                for(int i = 0; i < report.getAllFlights().get(i).getTrolleysOnFlight().size(); i++){
+                trolleyIdAttribute.setValue(report.getAllFlights().get(i).getTrolleysOnFlight().get(i).getTrolleyId()+"");
                 trolleyElement.setAttributeNode(trolleyIdAttribute);
                 
                 Attr trolleyTotalWeightAttribute = doc.createAttribute("TotalWeight");
-                trolleyTotalWeightAttribute.setValue("250");
- 
+                trolleyTotalWeightAttribute.setValue(report.getAllFlights().get(i).getTrolleysOnFlight().get(i).getTotalWeight()+"");
+                }
 	
 		// write the content into xml file
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -173,6 +179,6 @@ public XMLFileParser() {
 	}
         public static void main(String [] args){
             XMLFileParser p = new XMLFileParser(); 
-            p.writeFlightReportToXML(); 
+            
         }    
 }

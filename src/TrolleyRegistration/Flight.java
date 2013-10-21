@@ -17,12 +17,16 @@ public class Flight {
         
         public FlightRoute flightRoute; 
         public ArrayList<Trolley> trolleysOnFlight = new ArrayList<Trolley>(); 
-        public Calendar timestamp;  // in use with tag
+        public Calendar timestamp;  
         
         public Flight(FlightRoute flightRoute){
             this.flightRoute = flightRoute; 
             
         }
+        public FlightRoute getFlightRoute(){
+            return flightRoute; 
+        }
+        
         public void addTrolleyToFlight(Trolley newTrolley){
             if(newTrolley.getPayLoad() > 0){
                 trolleysOnFlight.add(newTrolley);
@@ -41,12 +45,9 @@ public class Flight {
             trolleysOnFlight.clear(); 
         }
        
-        public String getTrolleysOnFlight(){
-            String res = ""; 
-            for(Trolley t : trolleysOnFlight){
-                res += t.toString() + '\n'; 
-            }
-            return res; 
+        public ArrayList<Trolley> getTrolleysOnFlight(){ 
+            
+            return trolleysOnFlight; 
         }
         
         public void setTimeStamp(){
