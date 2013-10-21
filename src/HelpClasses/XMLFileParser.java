@@ -12,6 +12,13 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -27,6 +34,7 @@ import org.w3c.dom.NodeList;
 public class XMLFileParser {
 private static String TrolleysPath = System.getProperty("user.dir")+"/src/res/DOC/Trolleys.xml";
 private static String FlightRoutePath = System.getProperty("user.dir")+"/src/res/DOC/FlightRoute.xml"; 
+private static String FlightReportPath= System.getProperty("user.dir")+"/src/res/DOC/Report11.xml";
 
 private ArrayList<Trolley> trolleys = new ArrayList<Trolley>();    
 private ArrayList<FlightRoute> flightRoutes = new ArrayList<FlightRoute>(); 
@@ -102,4 +110,69 @@ public XMLFileParser() {
             return tempFlightRoute;        
     }
   
+    public void writeFlightReportToXML(){
+        	try {
+		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+ 
+		// root elements
+		Document doc = docBuilder.newDocument();
+		Element reportElement = doc.createElement("Report");
+		doc.appendChild(reportElement);
+                
+                Attr ReportDate = doc.createAttribute("Date"); 
+                ReportDate.setValue("Dato on created");
+                reportElement.setAttributeNode(ReportDate); 
+                
+                
+		// staff elements
+		Element flightrouteElement = doc.createElement("Flightroute");
+		reportElement.appendChild(flightrouteElement);
+ 
+		// set attribute to Flighroute element: 
+		Attr idAttribute = doc.createAttribute("Id");
+		idAttribute.setValue("1");
+		flightrouteElement.setAttributeNode(idAttribute);
+ 
+                
+                Attr destinationAttribute = doc.createAttribute("Destination");
+                destinationAttribute.setValue("SVN");
+                flightrouteElement.setAttributeNode(destinationAttribute); 
+                
+		
+		// trolley elements
+		Element trolleyElement = doc.createElement("Trolley");
+		flightrouteElement.appendChild(trolleyElement);
+                
+                //set ID attribute to Trolley element: 
+                Attr trolleyIdAttribute = doc.createAttribute("Id");
+                trolleyIdAttribute.setValue("1");
+                trolleyElement.setAttributeNode(trolleyIdAttribute);
+                
+                Attr trolleyTotalWeightAttribute = doc.createAttribute("TotalWeight");
+                trolleyTotalWeightAttribute.setValue("250");
+ 
+	
+		// write the content into xml file
+		TransformerFactory transformerFactory = TransformerFactory.newInstance();
+		Transformer transformer = transformerFactory.newTransformer();
+		DOMSource source = new DOMSource(doc);
+		StreamResult result = new StreamResult(new File(FlightReportPath));
+ 
+		// Output to console for testing
+		// StreamResult result = new StreamResult(System.out);
+ 
+		transformer.transform(source, result);
+ 
+		
+	  } catch (ParserConfigurationException pce) {
+		pce.printStackTrace();
+	  } catch (TransformerException tfe) {
+		tfe.printStackTrace();
+	  }
+	}
+        public static void main(String [] args){
+            XMLFileParser p = new XMLFileParser(); 
+            p.writeFlightReportToXML(); 
+        }    
 }
