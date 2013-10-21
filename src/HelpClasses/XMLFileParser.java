@@ -4,6 +4,7 @@
  */
 package HelpClasses;
 
+import TrolleyRegistration.Flight;
 import TrolleyRegistration.FlightReport;
 import TrolleyRegistration.FlightRoute;
 import TrolleyRegistration.Trolley;
@@ -179,6 +180,17 @@ public XMLFileParser() {
 	}
         public static void main(String [] args){
             XMLFileParser p = new XMLFileParser(); 
+            ArrayList traller = p.getTrolleys(); 
+            ArrayList flights = p.getFlightRoutes(); 
             
+            Flight testFlight = new Flight();
+            testFlight.setFlightRoute((FlightRoute)flights.get(1));
+            testFlight.addTrolleyToFlight((Trolley)traller.get(1));
+            testFlight.addTrolleyToFlight((Trolley)traller.get(2));
+            testFlight.addTrolleyToFlight((Trolley)traller.get(3));
+            FlightReport report = new FlightReport();
+            report.addFlightToReport(testFlight);
+           
+            p.writeFlightReportToXML(report);
         }    
 }

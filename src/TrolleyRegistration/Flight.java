@@ -23,8 +23,16 @@ public class Flight {
             this.flightRoute = flightRoute; 
             
         }
+
+    public Flight() {
+        
+    }
         public FlightRoute getFlightRoute(){
             return flightRoute; 
+        }
+        
+        public void setFlightRoute(FlightRoute newFlightRoute){
+            flightRoute = newFlightRoute; 
         }
         
         public void addTrolleyToFlight(Trolley newTrolley){
