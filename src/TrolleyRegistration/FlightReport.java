@@ -13,10 +13,10 @@ import java.util.GregorianCalendar;
  */
 public class FlightReport {
         private ArrayList<Flight> allFlights = new ArrayList<Flight>(); 
-        private Calendar dateStamp; 
+        private Date dateStamp; 
         
         public FlightReport() {
-            dateStamp = new GregorianCalendar(); 
+            dateStamp = new GregorianCalendar().getTime(); 
            
         }
         
@@ -30,7 +30,7 @@ public class FlightReport {
         public void clearFlightReportList(){
             allFlights.clear();
         }
-        public Calendar getDateStamp(){
+        public Date getDateStamp(){
             return dateStamp; 
         }
         
