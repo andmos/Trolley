@@ -123,42 +123,45 @@ public XMLFileParser() {
                 Document doc = docBuilder.newDocument();
 		
                 // root elements
-		Element reportElement = doc.createElement("Report");
+		Element reportElement = doc.createElement("report");
 		doc.appendChild(reportElement);
                 
-                Attr ReportDate = doc.createAttribute("Date"); 
+                Attr ReportDate = doc.createAttribute("date"); 
                 ReportDate.setValue(report.getDateStamp().toString());
                 reportElement.setAttributeNode(ReportDate); 
                 
                 
 		// staff elements
-		Element flightrouteElement = doc.createElement("Flightroute");
+		Element flightrouteElement = doc.createElement("flightroute");
 		reportElement.appendChild(flightrouteElement);
               for(int i = 0; i < report.getAllFlights().size(); i++){
 		// set attribute to Flighroute element: 
-		Attr idAttribute = doc.createAttribute("Id");
+		Attr idAttribute = doc.createAttribute("id");
 		idAttribute.setValue(report.getAllFlights().get(i).getFlightRoute().getFlightRouteNr());
 		flightrouteElement.setAttributeNode(idAttribute);
                 
                 
-                Attr destinationAttribute = doc.createAttribute("Destination");
+                Attr destinationAttribute = doc.createAttribute("destination");
                 destinationAttribute.setValue(report.getAllFlights().get(i).getFlightRoute().getDestination());
                 flightrouteElement.setAttributeNode(destinationAttribute); 
                 
 		
-		// trolley elements
-		Element trolleyElement = doc.createElement("Trolley");
-		flightrouteElement.appendChild(trolleyElement);
+		
                 
                 //set ID attribute to Trolley element: 
                 
-                Attr trolleyIdAttribute = doc.createAttribute("Id");
+               
                 for(int j = 0; j < report.getAllFlights().get(i).getTrolleysOnFlight().size(); j++){
+                // trolley elements
+		Element trolleyElement = doc.createElement("trolley");
+		flightrouteElement.appendChild(trolleyElement);
+                Attr trolleyIdAttribute = doc.createAttribute("id");
                 trolleyIdAttribute.setValue(report.getAllFlights().get(i).getTrolleysOnFlight().get(j).getTrolleyId()+"");
                 trolleyElement.setAttributeNode(trolleyIdAttribute);
                 
-                Attr trolleyTotalWeightAttribute = doc.createAttribute("TotalWeight");
-                trolleyTotalWeightAttribute.setValue(report.getAllFlights().get(i).getTrolleysOnFlight().get(i).getTotalWeight()+"");
+                Attr trolleyTotalWeightAttribute = doc.createAttribute("totalweight");
+                trolleyTotalWeightAttribute.setValue(report.getAllFlights().get(i).getTrolleysOnFlight().get(j).getTotalWeight()+"");
+                trolleyElement.setAttributeNode(trolleyTotalWeightAttribute); 
                 }
               }
 		// write the content into xml file
@@ -188,11 +191,22 @@ public XMLFileParser() {
             ArrayList traller = p.getTrolleys(); 
             ArrayList flights = p.getFlightRoutes(); 
             
-            Flight testFlight = new Flight();
+            Trolley t1 = (Trolley)traller.get(1); 
+            Trolley t2 = (Trolley)traller.get(2);
+            Trolley t3 = (Trolley)traller.get(3);
+            Trolley t4 = (Trolley)traller.get(4);
+            t1.setTotalWeight(600);
+            t2.setTotalWeight(700);
+            t3.setTotalWeight(800);
+            t4.setTotalWeight(900);
+             
+           Flight testFlight = new Flight();
             testFlight.setFlightRoute((FlightRoute)flights.get(1));
-            testFlight.addTrolleyToFlight((Trolley)traller.get(1));
-            testFlight.addTrolleyToFlight((Trolley)traller.get(2));
-            testFlight.addTrolleyToFlight((Trolley)traller.get(3));
+            testFlight.addTrolleyToFlight(t1);
+            testFlight.addTrolleyToFlight(t2);
+            testFlight.addTrolleyToFlight(t3);                       
+            testFlight.addTrolleyToFlight(t4);
+
             FlightReport report = new FlightReport();
             report.addFlightToReport(testFlight);
            

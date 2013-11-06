@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Report Date="Wed Nov 06 12:44:28 CET 2013">
-  <Flightroute Destination="LKN" Id="WF826/829(Lø)">
-    <Trolley/>
-  </Flightroute>
-</Report>
+<report date="Wed Nov 06 13:19:29 CET 2013">
+  <flightroute destination="LKN" id="WF826/829(Lø)">
+    <trolley id="2" totalweight="600"/>
+    <trolley id="3" totalweight="700"/>
+    <trolley id="4" totalweight="800"/>
+    <trolley id="5" totalweight="900"/>
+  </flightroute>
+</report>
