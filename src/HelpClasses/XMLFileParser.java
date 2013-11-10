@@ -41,7 +41,7 @@ public class XMLFileParser {
 
     private static String TrolleysPath = System.getProperty("user.dir") + "/src/res/DOC/Trolleys.xml";
     private static String FlightRoutePath = System.getProperty("user.dir") + "/src/res/DOC/FlightRoute.xml";
-    private static String FlightReportPath = System.getProperty("user.dir") + "/src/res/DOC/Report11.xml";
+    private static String FlightReportPath = System.getProperty("user.dir") + "/src/res/DOC/Report.xml";
     private ArrayList<Trolley> trolleys = new ArrayList<Trolley>();
     private ArrayList<FlightRoute> flightRoutes = new ArrayList<FlightRoute>();
 
