@@ -12,6 +12,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -26,6 +28,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 /*
  *
  * @TODO Kaste bedre exeptions! la det komme fram hva som skjer
@@ -111,26 +114,20 @@ public class XMLFileParser {
         return tempFlightRoute;
     }
 
-    /*
-     * Right know it Creates the xml - file, we want to append to 
-     * existing file. @TODO 
-     */
     public void writeFlightReportToXML(FlightReport report) {
         try {
+            // create document from existing file
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-            Document doc = docBuilder.newDocument();
-
-            // root elements
-            Element reportElement = doc.createElement("report");
-            doc.appendChild(reportElement);
-
+            Document doc = docBuilder.parse(FlightReportPath);  
+            Element reportElement = doc.getDocumentElement(); 
+            // set data to root - element
             Attr ReportDate = doc.createAttribute("date");
             ReportDate.setValue(report.getDateStamp().toString());
             reportElement.setAttributeNode(ReportDate);
 
 
-            // staff elements
+            // flightroute elements
             Element flightrouteElement = doc.createElement("flightroute");
             reportElement.appendChild(flightrouteElement);
             for (int i = 0; i < report.getAllFlights().size(); i++) {
@@ -139,17 +136,11 @@ public class XMLFileParser {
                 idAttribute.setValue(report.getAllFlights().get(i).getFlightRoute().getFlightRouteNr());
                 flightrouteElement.setAttributeNode(idAttribute);
 
-
                 Attr destinationAttribute = doc.createAttribute("destination");
                 destinationAttribute.setValue(report.getAllFlights().get(i).getFlightRoute().getDestination());
                 flightrouteElement.setAttributeNode(destinationAttribute);
 
-
-
-
                 //set ID attribute to Trolley element: 
-
-
                 for (int j = 0; j < report.getAllFlights().get(i).getTrolleysOnFlight().size(); j++) {
                     // trolley elements
                     Element trolleyElement = doc.createElement("trolley");
@@ -183,7 +174,11 @@ public class XMLFileParser {
             pce.printStackTrace();
         } catch (TransformerException tfe) {
             tfe.printStackTrace();
-        }
+        } catch (SAXException ex) {
+            Logger.getLogger(XMLFileParser.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(XMLFileParser.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }
 
     public static void main(String[] args) {
