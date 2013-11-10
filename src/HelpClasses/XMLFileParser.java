@@ -10,7 +10,6 @@ import TrolleyRegistration.FlightRoute;
 import TrolleyRegistration.Trolley;
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -116,11 +115,13 @@ public class XMLFileParser {
 
     public void writeFlightReportToXML(FlightReport report) {
         try {
+            
             // create document from existing file
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
             Document doc = docBuilder.parse(FlightReportPath);  
             Element reportElement = doc.getDocumentElement(); 
+            
             // set data to root - element
             Attr ReportDate = doc.createAttribute("date");
             ReportDate.setValue(report.getDateStamp().toString());
@@ -168,7 +169,7 @@ public class XMLFileParser {
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 
             transformer.transform(source, result);
-
+            
 
         } catch (ParserConfigurationException pce) {
             pce.printStackTrace();
