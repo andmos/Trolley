@@ -1,18 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-    <rapport dato="xxx"> 
-            <flightroute id="xxx" destination="yyy"> 
-                    <trolley id="vvv" totalWeight="zzz"/>
-                    <trolley id="vvv" totalWeight="zzz"/>
-                    <trolley id="vvv" totalWeight="zzz"/>
-                    <trolley id="vvv" totalWeight="zzz"/>
-            </flightroute>
-            <flightroute id="xxx" destination="yyy">
-                    <trolley id="vvv" totalWeight="zzz"/>
-                    <trolley id="vvv" totalWeight="zzz"/>
-                    <trolley id="vvv" totalWeight="zzz"/>
-                    <trolley id="vvv" totalWeight="zzz"/>
-            </flightroute>
-    </rapport>
-
-
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<report date="Sun Nov 10 13:29:30 CET 2013">
+</report>
