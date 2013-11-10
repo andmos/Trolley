@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package HelpClasses;
 
 import TrolleyRegistration.Flight;
@@ -35,7 +32,7 @@ import org.xml.sax.SAXException;
 
 /**
  *
- * @author haavamoa
+ * @author andreasmosti
  */
 public class XMLFileParser {
 
