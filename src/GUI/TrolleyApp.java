@@ -16,7 +16,7 @@ import javax.swing.*;
 
 /**
  * Trolley is a application made for Posten Norge.
- * @author haavamoa
+ * @author haavamoa, andreasmosti
  */
 public class TrolleyApp extends JPanel {
     //Variables to use when constructing GUI.

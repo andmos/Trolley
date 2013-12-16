@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package HelpClasses;
 
 /**
@@ -24,6 +20,20 @@ public class FileWriter {
 
     public void setFileName(String filename) {
         f = new File(filename);
+    }
+
+    public boolean checkIfFileExistsOrCreateNew(String filename) {
+        File yourFile = new File(filename);
+       try{ 
+        if (!yourFile.exists()) {
+            yourFile.createNewFile();
+            return false; 
+        }
+             
+       }catch(Exception e){
+           System.out.println("Error reading or creating file: " + e.getMessage());
+       }
+       return true;
     }
 
     public void writeSimpleStringToFile(String string) {
@@ -71,6 +81,6 @@ public class FileWriter {
             System.out.println("Error while reading from file " + e.getMessage());
             return "Coult not read file!";
         }
-        
+
     }
 }
