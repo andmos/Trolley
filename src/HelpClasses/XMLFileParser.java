@@ -190,6 +190,8 @@ public class XMLFileParser {
        
         
     }
+    
+    //This bit can be refactored, lot of DRY violations.
     public void createFlightReportToXMLFile(FlightReport report){
       	try {
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
