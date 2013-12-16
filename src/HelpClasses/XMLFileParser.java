@@ -124,7 +124,7 @@ public XMLFileParser() {
 		
                 // root elements
 		Element reportElement = doc.createElement("report");
-		doc.appendChild(reportElement);
+                doc.getElementById("report");
                 
                 Attr ReportDate = doc.createAttribute("date"); 
                 ReportDate.setValue(report.getDateStamp().toString());

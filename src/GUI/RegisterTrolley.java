@@ -5,6 +5,7 @@ package GUI;
 import GUIListeners.RegisterTrolleyItemChangedListener;
 import GUIListeners.RegisterTrolleyKeyListener;
 import TrolleyRegistration.Flight;
+import TrolleyRegistration.FlightReport;
 import TrolleyRegistration.FlightRoute;
 import TrolleyRegistration.Trolley;
 import java.awt.BorderLayout;
@@ -357,10 +358,12 @@ public class RegisterTrolley {
     
     public void goToTagAction(){
          flight.addTrolleyToFlight(trolley);
+         FlightReport report = new FlightReport();
+        report.addFlightToReport(flight);
+        trolleyApp.xmlp.writeFlightReportToXML(report);
                     if(trolley.getPayLoad()<0){
                         JOptionPane.showMessageDialog(null, "Totalvekt kan ikke være tomt");
                         totalWeigth.requestFocus();
-                        
                     }else{
                         flight.setTimeStamp();
                         Object[] valgene = {"Ja","Nei"};
