@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Report Date="Mon Dec 16 14:38:22 CET 2013" date="Mon Dec 16 14:42:23 CET 2013">
+<flightroute destination="LKN" id="WF826/829(Lø)">
+    <trolley id="2" totalweight="600"/>
+    <trolley id="3" totalweight="700"/>
+    <trolley id="4" totalweight="800"/>
+    <trolley id="5" totalweight="900"/>
+  </flightroute>
+<flightroute destination="LKN" id="WF826/829(Lø)">
+    <trolley id="2" totalweight="600"/>
+    <trolley id="3" totalweight="700"/>
+    <trolley id="4" totalweight="800"/>
+    <trolley id="5" totalweight="900"/>
+  </flightroute>
+</Report>
