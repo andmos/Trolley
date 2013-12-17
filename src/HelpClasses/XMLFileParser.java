@@ -26,10 +26,15 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+/*
+*
+* @TODO Kaste bedre exeptions! la det komme fram hva som skjer
+*/
+
 /**
- *
- * @author andreasmosti
- */
+*
+* @author andreasmosti
+*/
 public class XMLFileParser {
 
     private static LocalDate currentDate = new LocalDate();
@@ -39,14 +44,18 @@ public class XMLFileParser {
     private ArrayList<Trolley> trolleys = new ArrayList<Trolley>();
     private ArrayList<FlightRoute> flightRoutes = new ArrayList<FlightRoute>();
     private FileWriter fileWriter = new FileWriter();
-
+    
     public XMLFileParser() {
-        try {    
+        try {
+            //TODO: Add the rest of the XML files.
             trolleys = getTrolleysFromXMLFile();
             flightRoutes = getFlightRoutesFromXMLFile();
+            
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public ArrayList<Trolley> getTrolleys() {
@@ -55,6 +64,9 @@ public class XMLFileParser {
 
     public ArrayList<FlightRoute> getFlightRoutes() {
         return flightRoutes;
+    }
+
+    public void WriteFlightReportToXMLFile() {
     }
 
     private ArrayList<Trolley> getTrolleysFromXMLFile() throws Exception {
@@ -74,6 +86,7 @@ public class XMLFileParser {
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
+
         }
         return tempTrolley;
     }
@@ -96,31 +109,36 @@ public class XMLFileParser {
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
+
         }
         return tempFlightRoute;
     }
 
     public void writeFlightReportToXML(FlightReport report) {
         try {
-            if (!fileWriter.checkIfFileExistsOrCreateNew(FlightReportPath)) {
+            
+              if(!fileWriter.checkIfFileExistsOrCreateNew(FlightReportPath)){
                 createFlightReportToXMLFile(report);
             }
+            
             // create document from existing file
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
             Document doc = docBuilder.parse(FlightReportPath);
             Element reportElement = doc.getDocumentElement();
-
+            
             // set data to root - element
             Attr ReportDate = doc.createAttribute("date");
             ReportDate.setValue(report.getDateStamp().toString());
             reportElement.setAttributeNode(ReportDate);
+                  
+
 
             // flightroute elements
             Element flightrouteElement = doc.createElement("flightroute");
             reportElement.appendChild(flightrouteElement);
             for (int i = 0; i < report.getAllFlights().size(); i++) {
-                // set attribute to Flighroute element: 
+            // set attribute to Flighroute element:
                 Attr idAttribute = doc.createAttribute("id");
                 idAttribute.setValue(report.getAllFlights().get(i).getFlightRoute().getFlightRouteNr());
                 flightrouteElement.setAttributeNode(idAttribute);
@@ -129,9 +147,9 @@ public class XMLFileParser {
                 destinationAttribute.setValue(report.getAllFlights().get(i).getFlightRoute().getDestination());
                 flightrouteElement.setAttributeNode(destinationAttribute);
 
-                //set ID attribute to Trolley element: 
+                      //set ID attribute to Trolley element:
                 for (int j = 0; j < report.getAllFlights().get(i).getTrolleysOnFlight().size(); j++) {
-            
+                    // trolley elements
                     Element trolleyElement = doc.createElement("trolley");
                     flightrouteElement.appendChild(trolleyElement);
                     Attr trolleyIdAttribute = doc.createAttribute("id");
@@ -149,11 +167,15 @@ public class XMLFileParser {
             DOMSource source = new DOMSource(doc);
             StreamResult result = new StreamResult(new File(FlightReportPath));
 
+            // Output to console for testing
+            // StreamResult result = new StreamResult(System.out);
+
             //Formating the XML
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 
             transformer.transform(source, result);
+            
 
         } catch (ParserConfigurationException pce) {
             pce.printStackTrace();
@@ -164,69 +186,78 @@ public class XMLFileParser {
         } catch (IOException ex) {
             Logger.getLogger(XMLFileParser.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
+       
+        
     }
-
-    //This bit can be refactored, lots of DRY violations.
-    public void createFlightReportToXMLFile(FlightReport report) {
-        try {
-            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-            Document doc = docBuilder.newDocument();
-
-            // root elements
-            Element reportElement = doc.createElement("report");
-            doc.getElementById("report");
-
-            Attr ReportDate = doc.createAttribute("date");
-            ReportDate.setValue(report.getDateStamp().toString());
-            reportElement.setAttributeNode(ReportDate);
-
-            Element flightrouteElement = doc.createElement("flightroute");
-            reportElement.appendChild(flightrouteElement);
-            for (int i = 0; i < report.getAllFlights().size(); i++) {
-                // set attribute to Flighroute element: 
+    
+    //This bit can be refactored, lot of DRY violations.
+    public void createFlightReportToXMLFile(FlightReport report){
+              try {
+                DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+                Document doc = docBuilder.newDocument();
+                
+                // root elements
+                Element reportElement = doc.createElement("report");
+                doc.appendChild(reportElement); 
+                
+                Attr ReportDate = doc.createAttribute("date");
+                ReportDate.setValue(report.getDateStamp().toString());
+                reportElement.setAttributeNode(ReportDate);
+                
+                
+                
+                Element flightrouteElement = doc.createElement("flightroute");
+                reportElement.appendChild(flightrouteElement);
+              for(int i = 0; i < report.getAllFlights().size(); i++){
+                // set attribute to Flighroute element:
                 Attr idAttribute = doc.createAttribute("id");
                 idAttribute.setValue(report.getAllFlights().get(i).getFlightRoute().getFlightRouteNr());
                 flightrouteElement.setAttributeNode(idAttribute);
-
+                
+                
                 Attr destinationAttribute = doc.createAttribute("destination");
                 destinationAttribute.setValue(report.getAllFlights().get(i).getFlightRoute().getDestination());
                 flightrouteElement.setAttributeNode(destinationAttribute);
-
+                
+                
+                
                 Element trolleyElement = doc.createElement("trolley");
                 flightrouteElement.appendChild(trolleyElement);
-
-                //set ID attribute to Trolley element: 
+                
+                //set ID attribute to Trolley element:
+                
                 Attr trolleyIdAttribute = doc.createAttribute("id");
-                for (int j = 0; j < report.getAllFlights().get(i).getTrolleysOnFlight().size(); j++) {
-                    trolleyIdAttribute.setValue(report.getAllFlights().get(i).getTrolleysOnFlight().get(j).getTrolleyId() + "");
-                    trolleyElement.setAttributeNode(trolleyIdAttribute);
-
-                    Attr trolleyTotalWeightAttribute = doc.createAttribute("totalweight");
-                    trolleyTotalWeightAttribute.setValue(report.getAllFlights().get(i).getTrolleysOnFlight().get(i).getTotalWeight() + "");
+                for(int j = 0; j < report.getAllFlights().get(i).getTrolleysOnFlight().size(); j++){
+                trolleyIdAttribute.setValue(report.getAllFlights().get(i).getTrolleysOnFlight().get(j).getTrolleyId()+"");
+                trolleyElement.setAttributeNode(trolleyIdAttribute);
+                
+                Attr trolleyTotalWeightAttribute = doc.createAttribute("totalweight");
+                trolleyTotalWeightAttribute.setValue(report.getAllFlights().get(i).getTrolleysOnFlight().get(i).getTotalWeight()+"");
                 }
-            }
-            // write the content into xml file
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File(FlightReportPath));
-
-            //Formating the XML
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-
-            transformer.transform(source, result);
-
-        } catch (ParserConfigurationException pce) {
-            pce.printStackTrace();
-        } catch (TransformerException tfe) {
-            tfe.printStackTrace();
-        }
+              }
+                // write the content into xml file
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+                DOMSource source = new DOMSource(doc);
+                StreamResult result = new StreamResult(new File(FlightReportPath));
+ 
+                // Output to console for testing
+                // StreamResult result = new StreamResult(System.out);
+                
+                //Formating the XML
+                transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+                
+                transformer.transform(source, result);
+ 
+                
+         } catch (ParserConfigurationException pce) {
+                pce.printStackTrace();
+         } catch (TransformerException tfe) {
+                tfe.printStackTrace();
+         }
     }
-
     public static void main(String[] args) {
         XMLFileParser p = new XMLFileParser();
         ArrayList traller = p.getTrolleys();
@@ -253,4 +284,6 @@ public class XMLFileParser {
 
         p.writeFlightReportToXML(report);
     }
+
+   
 }
