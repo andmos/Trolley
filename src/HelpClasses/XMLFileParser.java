@@ -126,8 +126,6 @@ public class XMLFileParser {
             ReportDate.setValue(report.getDateStamp().toString());
             reportElement.setAttributeNode(ReportDate);
                   
-
-
             // flightroute elements
             Element flightrouteElement = doc.createElement("flightroute");
             reportElement.appendChild(flightrouteElement);
