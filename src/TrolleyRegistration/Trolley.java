@@ -19,11 +19,9 @@ public class Trolley {
         return trolleyId; 
     }
     
-    
     public int getOwnWeight(){
         return ownWeight; 
     }
-    
     
     public int getTotalWeight(){
         return totalWeight; 
@@ -37,7 +35,6 @@ public class Trolley {
         return totalWeight - ownWeight; 
     }
    
-    
     @Override
     public String toString(){
         return "Vogn " + trolleyId + " Egenvekt: " + ownWeight + " Lastvekt: " + getPayLoad() + " Totalvekt: " + getTotalWeight(); 

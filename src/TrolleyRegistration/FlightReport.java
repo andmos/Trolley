@@ -17,7 +17,6 @@ public class FlightReport {
         
         public FlightReport() {
             dateStamp = new GregorianCalendar().getTime(); 
-           
         }
         
         public ArrayList<Flight> getAllFlights(){

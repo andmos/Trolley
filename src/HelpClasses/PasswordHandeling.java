@@ -23,7 +23,6 @@ public class PasswordHandeling {
         return encryptedPassword;
     }
  
- 
     public boolean checkPassword(String submittedPassword){
        StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
        String encryptedPassword = getPasswordFromFile();

@@ -7,7 +7,6 @@ import TrolleyRegistration.Trolley;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
@@ -26,11 +25,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-/*
-*
-* @TODO Kaste bedre exeptions! la det komme fram hva som skjer
-*/
-
 /**
 *
 * @author andreasmosti
@@ -156,8 +150,8 @@ public class XMLFileParser {
                     trolleyIdAttribute.setValue(report.getAllFlights().get(i).getTrolleysOnFlight().get(j).getTrolleyId() + "");
                     trolleyElement.setAttributeNode(trolleyIdAttribute);
 
-                    Attr trolleyTotalWeightAttribute = doc.createAttribute("totalweight");
-                    trolleyTotalWeightAttribute.setValue(report.getAllFlights().get(i).getTrolleysOnFlight().get(j).getTotalWeight() + "");
+                    Attr trolleyTotalWeightAttribute = doc.createAttribute("payload");
+                    trolleyTotalWeightAttribute.setValue(report.getAllFlights().get(i).getTrolleysOnFlight().get(j).getPayLoad()+ "");
                     trolleyElement.setAttributeNode(trolleyTotalWeightAttribute);
                 }
             }
@@ -232,8 +226,8 @@ public class XMLFileParser {
                 trolleyIdAttribute.setValue(report.getAllFlights().get(i).getTrolleysOnFlight().get(j).getTrolleyId()+"");
                 trolleyElement.setAttributeNode(trolleyIdAttribute);
                 
-                Attr trolleyTotalWeightAttribute = doc.createAttribute("totalweight");
-                trolleyTotalWeightAttribute.setValue(report.getAllFlights().get(i).getTrolleysOnFlight().get(i).getTotalWeight()+"");
+                Attr trolleyTotalWeightAttribute = doc.createAttribute("payload");
+                trolleyTotalWeightAttribute.setValue(report.getAllFlights().get(i).getTrolleysOnFlight().get(i).getPayLoad()+"");
                 }
               }
                 // write the content into xml file
