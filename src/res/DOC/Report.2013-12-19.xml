@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<report date="Thu Dec 19 20:43:19 CET 2013">
+  <flightroute destination="LKN" id="WF826/829(Lø)">
+    <trolley id="5"/>
+  </flightroute>
+<flightroute destination="LKN" id="WF826/829(Lø)">
+    <trolley id="2" payload="390"/>
+    <trolley id="3" payload="480"/>
+    <trolley id="4" payload="585"/>
+    <trolley id="5" payload="685"/>
+  </flightroute>
+<flightroute destination="LKN" id="WF826/829(Lø)">
+    <trolley id="2" payload="390"/>
+    <trolley id="3" payload="480"/>
+    <trolley id="4" payload="585"/>
+    <trolley id="5" payload="685"/>
+  </flightroute>
+</report>

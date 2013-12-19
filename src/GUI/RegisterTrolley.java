@@ -357,8 +357,8 @@ public class RegisterTrolley {
     }
     
     public void goToTagAction(){
-         flight.addTrolleyToFlight(trolley);
-         FlightReport report = new FlightReport();
+        flight.addTrolleyToFlight(trolley);
+        FlightReport report = new FlightReport();
         report.addFlightToReport(flight);
         trolleyApp.xmlp.writeFlightReportToXML(report);
                     if(trolley.getPayLoad()<0){

@@ -14,8 +14,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.joda.time.LocalDate;
@@ -153,22 +155,8 @@ public class XMLFileParser {
                     trolleyElement.setAttributeNode(trolleyTotalWeightAttribute);
                 }
             }
-            // write the content into xml file
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File(FlightReportPath));
-
-            // Output to console for testing
-            // StreamResult result = new StreamResult(System.out);
-
-            //Formating the XML
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-
-            transformer.transform(source, result);
+            TransformAndFormatXML(doc);
             
-
         } catch (ParserConfigurationException pce) {
             pce.printStackTrace();
         } catch (TransformerException tfe) {
@@ -228,27 +216,24 @@ public class XMLFileParser {
                 trolleyTotalWeightAttribute.setValue(report.getAllFlights().get(i).getTrolleysOnFlight().get(i).getPayLoad()+"");
                 }
               }
-                // write the content into xml file
-                TransformerFactory transformerFactory = TransformerFactory.newInstance();
-                Transformer transformer = transformerFactory.newTransformer();
-                DOMSource source = new DOMSource(doc);
-                StreamResult result = new StreamResult(new File(FlightReportPath));
- 
-                // Output to console for testing
-                // StreamResult result = new StreamResult(System.out);
-                
-                //Formating the XML
-                transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-                transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-                
-                transformer.transform(source, result);
- 
+                TransformAndFormatXML(doc); 
                 
          } catch (ParserConfigurationException pce) {
                 pce.printStackTrace();
          } catch (TransformerException tfe) {
                 tfe.printStackTrace();
          }
+    }
+    
+     private void TransformAndFormatXML(Document doc) throws IllegalArgumentException, TransformerException, TransformerConfigurationException, TransformerFactoryConfigurationError {
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
+        DOMSource source = new DOMSource(doc);
+        StreamResult result = new StreamResult(new File(FlightReportPath));
+
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+        transformer.transform(source, result);
     }
     public static void main(String[] args) {
         XMLFileParser p = new XMLFileParser();
@@ -276,6 +261,8 @@ public class XMLFileParser {
 
         p.writeFlightReportToXML(report);
     }
+
+   
 
    
 }

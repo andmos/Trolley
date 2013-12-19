@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<report date="Wed Dec 18 23:37:56 CET 2013">
+  <flightroute destination="MJF" id="WF739">
+    <trolley id="8"/>
+  </flightroute>
+<flightroute destination="MJF" id="WF739">
+    <trolley id="8" payload="385"/>
+  </flightroute>
+</report>
