@@ -141,7 +141,7 @@ public class Tag{
         c.gridx = 0;
         c.gridy = 4;
         JLabel weigth = new JLabel(trolley.getPayLoad()+"kg");
-        weigth.setFont(new Font(Font.MONOSPACED, Font.BOLD, 32));
+        weigth.setFont(new Font(Font.MONOSPACED, Font.BOLD, 40));
         weigthDatePanel.add(weigth,c);
         
         trolleyApp.add(weigthDatePanel,BorderLayout.CENTER);

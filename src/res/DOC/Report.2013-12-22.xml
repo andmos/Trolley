@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<report date="Sun Dec 22 16:16:26 CET 2013">
+  <flightroute destination="ANX" id="WF842">
+    <trolley id="5"/>
+  </flightroute>
+<flightroute destination="ANX" id="WF842">
+    <trolley id="5" payload="485"/>
+  </flightroute>
+<flightroute destination="SSJ" id="WF701">
+    <trolley id="3" payload="380"/>
+  </flightroute>
+</report>
